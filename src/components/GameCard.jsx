@@ -1,26 +1,28 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Image, Text } from "react-native";
 import { Link } from "react-router-native";
 import { COLORS } from "../utils/colors";
 
 const GameCard = ({ game }) => {
+  console.log("game", game);
   return (
-    <View key={game.id} styles={style.card}>
+    <View key={game.id} style={styles.cardContainer}>
       <Link to={`/game/${game.id}`}>
-        <Image source={{ uri: game.image }} styles={style.cardImage}></Image>
-        <Text numberOfLines={1} ellipsisMode="tail" styles={style.cardText}>
-          {game.name}
-        </Text>
+        <Image source={{ uri: game.image }} style={styles.cardImage}></Image>
       </Link>
+      <Text numberOfLines={1} ellipsisMode="tail" style={styles.cardText}>
+        {game.name}
+      </Text>
     </View>
   );
 };
 
-const style = StyleSheet.create({
-  card: {
+const styles = StyleSheet.create({
+  cardContainer: {
     width: "31%",
     margin: 4,
-    borderWidth: 3,
+    borderWidth: 4,
     borderColor: COLORS.primary,
+    backgroundColor: COLORS.primary,
     borderRadius: 8,
   },
   cardImage: {
@@ -31,12 +33,11 @@ const style = StyleSheet.create({
   },
   cardText: {
     width: "103%",
-    borderBottomLeftRadius: 8,
-    borderBottomRightRadius: 8,
+    borderBottomLeftRadius: 5,
+    borderBottomRightRadius: 5,
     position: "absolute",
-    bottom: -1,
-    left: -2,
     textAlign: "center",
+    bottom: -2,
     padding: 2,
     paddingLeft: 8,
     color: "white",

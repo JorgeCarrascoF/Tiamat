@@ -36,7 +36,7 @@ const Index = () => {
 
   return (
     <View style={styles.container}>
-      <GamesContext.Provider value={(data, setData)}>
+      <GamesContext.Provider value={{ data, setData }}>
         <AppBar></AppBar>
         <Routes>
           <Route path="/" exact Component={HomePage} />
