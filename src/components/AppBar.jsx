@@ -11,8 +11,6 @@ const links = [
 ];
 
 const AppBar = () => {
-  // const path = useLocation().pathname;
-
   return (
     <View style={styles.appbar}>
       {links.map((link) => (
