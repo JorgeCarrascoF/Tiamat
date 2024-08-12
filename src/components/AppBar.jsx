@@ -30,10 +30,14 @@ const AppBar = () => {
 const styles = StyleSheet.create({
     appbar: {
         width: '100%',
+        height: 50,
         backgroundColor: COLORS.primary,	
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         alignItems: 'center',
+        position: 'absolute',
+        bottom: 0,
+        zIndex: 10
     }
 })
 
