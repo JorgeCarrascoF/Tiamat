@@ -3,7 +3,7 @@ import AppBarButton from "./AppBarButton";
 import { COLORS } from "../utils/colors";
 
 const links = [
-  { path: "/", name: "Home", icon: require("../assets/img/appbar/games.png") },
+  { path: "/", name: "Home", icon: require("../assets/img/appbar/home.png") },
   { path: "/games", name: "Games", icon: require("../assets/img/appbar/games.png") },
   { path: "/owners", name: "Owners", icon: require("../assets/img/appbar/account.png") },
   { path: "/tools", name: "Tools", icon: require("../assets/img/appbar/tool.png") },

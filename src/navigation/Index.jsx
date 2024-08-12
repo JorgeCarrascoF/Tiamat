@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import Constants from "expo-constants";
 import { View } from "react-native-web";
@@ -20,47 +20,53 @@ import TeamDivisorPage from "../screens/TeamDivisorPage";
 import PointTrackerPage from "../screens/PointTrackerPage";
 import SettingsPage from "../screens/SettingsPage";
 
-
+export const GamesContext = createContext();
 
 const Index = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({});
 
   useEffect(() => {
-    setData(fetchData());
+    const loadData = async () => {
+      const dataFeched = await fetchData();
+      setData(dataFeched);
+    };
+
+    loadData();
   }, []);
 
   return (
     <View style={styles.container}>
+      <GamesContext.Provider value={(data, setData)}>
         <AppBar></AppBar>
         <Routes>
-            <Route path='/' exact Component={HomePage}/>
-             <Route path='/games' exact Component={GameListPage}/>
-            <Route path='/game/:id' exact Component={GamePage}/>
-            <Route path='/newgame' exact Component={NewGamePage}/>
-            <Route path='/owners' exact Component={OwnerListPage}/>
-            <Route path='/owner/:id' exact Component={OwnerPage}/>
-            <Route path='/newowner' exact Component={NewOwnerPage}/>
-            <Route path='/tools' exact Component={ToolsPage}/>
-            <Route path='/tools/rolldice' exact Component={DiceRollerPage}/>
-            <Route path='/tools/turns' exact Component={TurnSelectorPage}/>
-            <Route path='/tools/teams' exact Component={TeamDivisorPage}/>
-            <Route path='/tools/points' exact Component={PointTrackerPage}/>
-            <Route path='/settings' exact Component={SettingsPage}/>
+          <Route path="/" exact Component={HomePage} />
+          <Route path="/games" exact Component={GameListPage} />
+          <Route path="/game/:id" exact Component={GamePage} />
+          <Route path="/newgame" exact Component={NewGamePage} />
+          <Route path="/owners" exact Component={OwnerListPage} />
+          <Route path="/owner/:id" exact Component={OwnerPage} />
+          <Route path="/newowner" exact Component={NewOwnerPage} />
+          <Route path="/tools" exact Component={ToolsPage} />
+          <Route path="/tools/rolldice" exact Component={DiceRollerPage} />
+          <Route path="/tools/turns" exact Component={TurnSelectorPage} />
+          <Route path="/tools/teams" exact Component={TeamDivisorPage} />
+          <Route path="/tools/points" exact Component={PointTrackerPage} />
+          <Route path="/settings" exact Component={SettingsPage} />
         </Routes>
+      </GamesContext.Provider>
     </View>
   );
-
 };
 
 const styles = StyleSheet.create({
   container: {
-        paddingTop: Constants.statusBarHeight,
-        backgroundColor: "#FFFFFF",
-        height: "100%",
-        zIndex: 0,
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+    paddingTop: Constants.statusBarHeight,
+    backgroundColor: "#FFFFFF",
+    height: "100%",
+    zIndex: 0,
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 export default Index;
