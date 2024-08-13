@@ -10,10 +10,10 @@ const NumPlayerSelector = ({
 }) => {
   return (
     <View style={{ alignItems: "center" }}>
-      <Text>{text}</Text>
-      <View style={styles.filterRow}>
+      <Text style={styles.numPlayerSelectorTitle}>{text}</Text>
+      <View style={styles.numPlayerSelectorRow}>
         <Pressable
-          style={styles.filterButton}
+          style={styles.numPlayerSelectorButton}
           onPress={() => {
             let newPlayers = numPlayers - 1;
             if (newPlayers >= lowerLimit) {
@@ -21,11 +21,11 @@ const NumPlayerSelector = ({
             }
           }}
         >
-          <Text style={styles.filterButtonText}>-</Text>
+          <Text style={styles.numPlayerSelectorButtonText}>-</Text>
         </Pressable>
-        <Text style={styles.filterPlayersText}>{numPlayers}</Text>
+        <Text style={styles.numPlayerSelectorPlayersText}>{numPlayers}</Text>
         <Pressable
-          style={styles.filterButton}
+          style={styles.numPlayerSelectorButton}
           onPress={() => {
             let newPlayers = numPlayers + 1;
             if (newPlayers <= upperLimit) {
@@ -33,7 +33,7 @@ const NumPlayerSelector = ({
             }
           }}
         >
-          <Text style={styles.filterButtonText}>+</Text>
+          <Text style={styles.numPlayerSelectorButtonText}>+</Text>
         </Pressable>
       </View>
     </View>
@@ -41,14 +41,18 @@ const NumPlayerSelector = ({
 };
 
 const styles = StyleSheet.create({
-  filterRow: {
+  numPlayerSelectorTitle: {
+    textAlign: "center",
+    fontSize: 18,
+  },
+  numPlayerSelectorRow: {
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-evenly",
     marginTop: 10,
     alignItems: "center",
   },
-  filterButton: {
+  numPlayerSelectorButton: {
     backgroundColor: COLORS.primary,
     color: "white",
     width: 25,
@@ -58,7 +62,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     fontSize: 20,
   },
-  filterButtonText: {
+  numPlayerSelectorButtonText: {
     width: "100%",
     textAlign: "center",
     borderRadius: 15,
@@ -66,10 +70,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     paddingBottom: 1,
   },
-  filterPlayersText: {
+  numPlayerSelectorPlayersText: {
     textAlign: "center",
     fontSize: 20,
-    marginHorizontal: 5,
+    marginHorizontal: 10,
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 4,

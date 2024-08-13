@@ -3,7 +3,6 @@ import { Link } from "react-router-native";
 import { COLORS } from "../utils/colors";
 
 const GameCard = ({ game }) => {
-  console.log("game", game);
   return (
     <View key={game.id} style={styles.cardContainer}>
       <Link to={`/game/${game.id}`}>
