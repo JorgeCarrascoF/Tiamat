@@ -1,7 +1,6 @@
 import { createContext, useEffect, useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Constants from "expo-constants";
-import { View } from "react-native-web";
 import fetchData from "../services/fetchData";
 import AppBar from "../components/AppBar";
 import { Routes, Route } from "react-router-native";

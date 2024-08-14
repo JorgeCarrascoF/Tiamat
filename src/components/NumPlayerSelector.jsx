@@ -1,4 +1,4 @@
-import { View, Pressable, Text, StyleSheet } from "react-native-web";
+import { View, Pressable, Text, StyleSheet } from "react-native";
 import { COLORS } from "../utils/colors";
 
 const NumPlayerSelector = ({
