@@ -14,12 +14,18 @@ import { useEffect, useState } from "react";
 import fetchGameList from "../services/fetchGameList";
 import fetchGameData from "../services/fetchGameData";
 import SearchedGameInfoCard from "./SearchedGameInfoCard";
+import FormInput from "./formInput";
+import AddGameQuestion from "./AddGameQuestion";
+import FormOwnerSelector from "./FormOwnerSelector";
 
 const APIForm = () => {
   const [gameName, setGameName] = useState("");
   const [gameID, setGameID] = useState("");
 
   const [chosenGame, setChosenGame] = useState(null);
+  const [chosenOwner, setChosenOwner] = useState("");
+
+  const [choosingOwner, setChoosingOwner] = useState(false);
 
   const [gameForSearch, setGameForSearch] = useState("");
   const [searchedGameList, setSearchedGameList] = useState([]);
@@ -37,6 +43,8 @@ const APIForm = () => {
 
   const searchGame = async () => {
     if (!loading) {
+      setChoosingOwner(false);
+      setChosenGame(null);
       Keyboard.dismiss();
       setLoading(true);
       let data = await fetchGameList(gameForSearch);
@@ -46,30 +54,32 @@ const APIForm = () => {
     }
   };
 
+  const addGame = () => {
+    setSearchedGameList([]);
+    setChoosingOwner(true);
+    console.log("---ADDING GAME---");
+    console.log("Name: " + gameName);
+    console.log("ID: " + gameID);
+    console.log("description: " + chosenGame.description);
+    console.log("image: " + chosenGame.image);
+    console.log(
+      "players: " + chosenGame.minPlayers + " - " + chosenGame.maxPlayers
+    );
+    console.log("---GAME ADDED---");
+  };
+
+  const cancelAddition = () => {
+    console.log("Game addition cancelled");
+    setChosenGame(null);
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.inputRow}>
-        <TextInput
-          style={styles.input}
-          onChangeText={(e) => {
-            setGameForSearch(e);
-          }}
-        ></TextInput>
-        <Pressable
-          style={[
-            styles.searchButton,
-            { backgroundColor: loading ? "grey" : COLORS.primary },
-          ]}
-          onPress={() => {
-            searchGame();
-          }}
-        >
-          <Image
-            style={styles.searchIcon}
-            source={require("../assets/img/search.png")}
-          />
-        </Pressable>
-      </View>
+      <FormInput
+        setField={setGameForSearch}
+        triggerAction={searchGame}
+        loading={loading}
+      />
       {searchedGameList.length > 0 && (
         <View
           style={[
@@ -93,7 +103,8 @@ const APIForm = () => {
                 onPress={() => {
                   selectGame(item);
                 }}
-              >
+              > 
+                
                 <Text
                   numberOfLines={1}
                   ellipsizeMode="tail"
@@ -111,22 +122,16 @@ const APIForm = () => {
       {chosenGame != null && (
         <View style={styles.gameInfoContainer}>
           <SearchedGameInfoCard data={chosenGame} />
-          <View style={styles.questionContainer}>
-            <Text style={styles.questionText}>
-              Add <Text style={styles.highlightedText}>{chosenGame.name}</Text>{" "}
-              to your games?
-            </Text>
-            <View style={styles.row}>
-              <Pressable style={styles.button}>
-                <Text>Yes</Text>
-              </Pressable>
-              <Pressable style={styles.button}>
-                <Text>No</Text>
-              </Pressable>
-            </View>
-          </View>
+          {!choosingOwner && (
+            <AddGameQuestion
+              gameName={chosenGame.name}
+              addGame={addGame}
+              cancelAddition={cancelAddition}
+            />
+          )}
         </View>
       )}
+      {choosingOwner && <FormOwnerSelector setOwner={setChosenOwner} />}
     </View>
   );
 };
@@ -135,31 +140,6 @@ const styles = StyleSheet.create({
   container: {
     width: "95%",
     alignItems: "center",
-  },
-  inputRow: {
-    width: "100%",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  input: {
-    width: "80%",
-    borderRadius: 30,
-    borderWidth: 2,
-    borderColor: COLORS.primary,
-    backgroundColor: COLORS.terciary,
-    paddingHorizontal: 10,
-  },
-  searchButton: {
-    paddingVertical: 7,
-    paddingHorizontal: 15,
-    borderRadius: 30,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  searchIcon: {
-    width: 20,
-    height: 20,
   },
   gameListContainer: {
     marginTop: 10,
@@ -179,29 +159,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     width: "95%",
     alignItems: "center",
-  },
-  highlightedText: {
-    color: COLORS.primary,
-    fontWeight: "bold",
-  },
-  questionContainer: {
-    marginTop: 5,
-    padding: 10,
-  },
-  questionText: {
-    fontSize: 16,
-    textAlign: "center",
-  },
-  row: {
-    flexDirection: "row",
-    marginTop: 5,
-    justifyContent: "space-around",
-  },
-  button: {
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    borderRadius: 5,
-    backgroundColor: COLORS.primary,
   },
 });
 
