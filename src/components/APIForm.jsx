@@ -1,24 +1,26 @@
 import {
-  Image,
   Keyboard,
   Pressable,
   StyleSheet,
-  TextInput,
   Text,
   View,
-  ScrollView,
   FlatList,
 } from "react-native";
 import { COLORS } from "../utils/colors";
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import fetchGameList from "../services/fetchGameList";
 import fetchGameData from "../services/fetchGameData";
 import SearchedGameInfoCard from "./SearchedGameInfoCard";
 import FormInput from "./formInput";
 import AddGameQuestion from "./AddGameQuestion";
 import FormOwnerSelector from "./FormOwnerSelector";
+import { GamesContext } from "../navigation/Index";
+import saveData from "../services/saveData";
+import { redirect } from "react-router-native";
 
 const APIForm = () => {
+  const { data, setData } = useContext(GamesContext);
+
   const [gameName, setGameName] = useState("");
   const [gameID, setGameID] = useState("");
 
@@ -57,15 +59,24 @@ const APIForm = () => {
   const addGame = () => {
     setSearchedGameList([]);
     setChoosingOwner(true);
-    console.log("---ADDING GAME---");
-    console.log("Name: " + gameName);
-    console.log("ID: " + gameID);
-    console.log("description: " + chosenGame.description);
-    console.log("image: " + chosenGame.image);
-    console.log(
-      "players: " + chosenGame.minPlayers + " - " + chosenGame.maxPlayers
-    );
-    console.log("---GAME ADDED---");
+  };
+
+  const saveGameAndOwner = () => {
+    let game = {
+      id: gameID,
+      name: gameName,
+      description: chosenGame.description,
+      minPlayers: chosenGame.minPlayers,
+      maxPlayers: chosenGame.maxPlayers,
+      owner: chosenOwner,
+      image: chosenGame.image,
+    };
+
+    let newData = { ...data };
+    newData.tabletopGames.push(game);
+    setData(newData);
+    saveData(newData);
+    redirect("/games");
   };
 
   const cancelAddition = () => {
@@ -103,8 +114,7 @@ const APIForm = () => {
                 onPress={() => {
                   selectGame(item);
                 }}
-              > 
-                
+              >
                 <Text
                   numberOfLines={1}
                   ellipsizeMode="tail"
@@ -131,7 +141,23 @@ const APIForm = () => {
           )}
         </View>
       )}
-      {choosingOwner && <FormOwnerSelector setOwner={setChosenOwner} />}
+      {choosingOwner && (
+        <FormOwnerSelector
+          selectedOwner={chosenOwner}
+          setOwner={setChosenOwner}
+        />
+      )}
+      {chosenOwner !== "" && (
+        <Pressable
+          style={styles.saveGameButton}
+          onPress={() => {
+            console.log("Game added to owner " + chosenOwner);
+            saveGameAndOwner();
+          }}
+        >
+          <Text style={styles.saveGameButtonText}>Add game</Text>
+        </Pressable>
+      )}
     </View>
   );
 };
@@ -159,6 +185,16 @@ const styles = StyleSheet.create({
     marginTop: 10,
     width: "95%",
     alignItems: "center",
+  },
+  saveGameButton: {
+    backgroundColor: COLORS.primary,
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 10,
+  },
+  saveGameButtonText: {
+    color: "white",
+    fontWeight: "bold",
   },
 });
 

@@ -1,12 +1,41 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { COLORS } from "../utils/colors";
 
-const OwnerCard = ({ owner }) => {
+const OwnerCard = ({ owner, selectedOwner, setOwner }) => {
   return (
-    <View style={styles.card}>
-      <Image source={owner.image} style={styles.image}></Image>
-      <Text style={styles.text}>{owner.name}</Text>
-    </View>
+    <Pressable
+      style={styles.card}
+      onPress={() => {
+        if (selectedOwner === owner.id) {
+          setOwner("");
+        } else {
+          setOwner(owner.id);
+        }
+      }}
+    >
+      <View
+        style={[
+          styles.imageContainer,
+          {
+            borderColor:
+              selectedOwner === owner.id ? COLORS.primary : COLORS.terciary,
+          },
+        ]}
+      >
+        <Image source={owner.image} style={styles.image}></Image>
+      </View>
+      <Text
+        style={[
+          styles.text,
+          {
+            backgroundColor:
+              selectedOwner === owner.id ? COLORS.primary : COLORS.terciary,
+          },
+        ]}
+      >
+        {owner.name}
+      </Text>
+    </Pressable>
   );
 };
 
@@ -14,17 +43,18 @@ const styles = StyleSheet.create({
   card: {
     alignItems: "center",
   },
-  image: {
+  imageContainer: {
     borderWidth: 5,
-    borderColor: COLORS.primary,
+    borderRadius: 100,
+    overflow: "hidden",
+  },
+  image: {
     height: 100,
     width: 100,
-    borderRadius: 50,
   },
   text: {
-    backgroundColor: COLORS.primary,
     fontSize: 18,
-    marginTop: -10,
+    marginTop: -15,
     borderRadius: 15,
     paddingVertical: 2,
     paddingHorizontal: 15,
