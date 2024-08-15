@@ -5,7 +5,6 @@ const fetchGameData = async (id) => {
   try {
     const xmlString = await fetchGameDataXML(id);
     const gameData = await parseXML(xmlString);
-
     data = extractGameData(gameData);
   } catch (err) {
     console.error("Error fetching game data " + err.message);
@@ -28,8 +27,9 @@ const fetchGameDataXML = async (id) => {
 };
 
 const extractGameData = (data) => {
-  let name = data.items.item[0].name[0].$.value;
-  let description = data.items.item[0].description[0];
+  let name = data.boardgames.boardgame[0].name[0]._;
+
+  let description = data.boardgames.boardgame[0].description[0];
   description = description
     .replaceAll("<br/>", "")
     .replaceAll("&quot;", "")
@@ -38,14 +38,14 @@ const extractGameData = (data) => {
     .replaceAll("&#10;", " ");
 
   let image;
-  if (data.items.item[0].image != undefined) {
-    image = data.items.item[0].image[0];
+  if (data.boardgames.boardgame[0].image != undefined) {
+    image = data.boardgames.boardgame[0].image[0];
   } else {
     image = "https://media.makeameme.org/created/best-placeholder-ever.jpg";
   }
 
-  let minPlayers = data.items.item[0].minplayers[0].$.value;
-  let maxPlayers = data.items.item[0].maxplayers[0].$.value;
+  let minPlayers = data.boardgames.boardgame[0].minplayers[0];
+  let maxPlayers = data.boardgames.boardgame[0].maxplayers[0];
 
   return { name, description, image, minPlayers, maxPlayers };
 };

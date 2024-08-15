@@ -17,33 +17,35 @@ const GameListPage = () => {
   }, [data]);
 
   return (
-    <ScrollView style={styles.container}>
-      <GameFilter
-        games={games}
-        allGames={data.tabletopGames}
-        setGames={setGames}
-      ></GameFilter>
-      <Text style={styles.gameListTitle}>Juegos: {games.length}</Text>
-      <View style={styles.gameList}>
-        {games.map((game) => (
-          <GameCard game={game} key={game.id}></GameCard>
-        ))}
-      </View>
+    <View>
+      <ScrollView style={styles.container}>
+        <GameFilter
+          games={games}
+          allGames={data.tabletopGames}
+          setGames={setGames}
+        ></GameFilter>
+        <Text style={styles.gameListTitle}>Juegos: {games.length}</Text>
+        <View style={styles.gameList}>
+          {games.map((game) => (
+            <GameCard game={game} key={game.id}></GameCard>
+          ))}
+        </View>
+      </ScrollView>
       <Link to={"/newgame"} style={styles.link}>
         <Image
           source={require("../assets/img/plus.png")}
           style={styles.linkImage}
         />
       </Link>
-    </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 40,
+    marginBottom: 50,
     width: "100%",
-    position: "relative",
+    height: "100%",
   },
   gameListTitle: {
     alingSelf: "flex-start",
@@ -67,11 +69,11 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   link: {
+    position: "absolute",
+    borderRadius: 50,
+    right: 10,
+    bottom: 60,
     backgroundColor: COLORS.primary,
-    borderRadius: 100,
-    position: "fixed",
-    bottom: 25,
-    right: 15,
   },
   linkImage: {
     width: 50,

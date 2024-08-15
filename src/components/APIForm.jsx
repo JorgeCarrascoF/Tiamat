@@ -11,7 +11,7 @@ import { useContext, useState } from "react";
 import fetchGameList from "../services/fetchGameList";
 import fetchGameData from "../services/fetchGameData";
 import SearchedGameInfoCard from "./SearchedGameInfoCard";
-import FormInput from "./formInput";
+import FormInput from "./FormInput";
 import AddGameQuestion from "./AddGameQuestion";
 import FormOwnerSelector from "./FormOwnerSelector";
 import { GamesContext } from "../navigation/Index";
@@ -76,11 +76,24 @@ const APIForm = () => {
     newData.tabletopGames.push(game);
     setData(newData);
     saveData(newData);
+
+    resetForm();
     redirect("/games");
   };
 
+  const resetForm = () => {
+    setGameName("");
+    setGameID("");
+    setChosenGame(null);
+    setChosenOwner("");
+    setChoosingOwner(false);
+    setGameForSearch("");
+    setSearchedGameList([]);
+    setSearchedGameIDs([]);
+    setLoading(false);
+  };
+
   const cancelAddition = () => {
-    console.log("Game addition cancelled");
     setChosenGame(null);
   };
 
@@ -151,7 +164,6 @@ const APIForm = () => {
         <Pressable
           style={styles.saveGameButton}
           onPress={() => {
-            console.log("Game added to owner " + chosenOwner);
             saveGameAndOwner();
           }}
         >
