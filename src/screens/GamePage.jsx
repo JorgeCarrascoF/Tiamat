@@ -11,6 +11,7 @@ import { Link, useParams } from "react-router-native";
 import { GamesContext } from "../navigation/Index";
 import { COLORS } from "../utils/colors";
 import GamePageBar from "../components/GamePageBar";
+import GameNumPlayersCard from "../components/GameNumPlayersCard";
 
 const GamePage = () => {
   const [deleting, setDeleting] = useState(false);
@@ -36,6 +37,12 @@ const GamePage = () => {
       >
         <Text style={styles.gameDescription}>{game.description}</Text>
       </ScrollView>
+      <View style={styles.row}>
+        <GameNumPlayersCard
+          minPlayers={game.minPlayers}
+          maxPLayers={game.maxPlayers}
+        ></GameNumPlayersCard>
+      </View>
     </View>
   );
 };
@@ -48,7 +55,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 20,
   },
-
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: "100%",
+    marginTop: 30,
+  },
   gameImage: {
     width: 280,
     height: 280,
