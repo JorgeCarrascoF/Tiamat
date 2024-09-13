@@ -26,8 +26,8 @@ const styles = StyleSheet.create({
     color: "white",
   },
   icon: {
-    width: 20,
-    height: 20,
+    width: 18,
+    height: 18,
     marginRight: 5,
   }
 });

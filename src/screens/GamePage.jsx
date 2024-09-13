@@ -1,12 +1,6 @@
 import { useContext, useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  ScrollView,
-} from "react-native";
-import { redirect, useParams } from "react-router-native";
+import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
+import { redirect, useNavigate, useParams } from "react-router-native";
 import { GamesContext } from "../navigation/Index";
 import { COLORS } from "../utils/colors";
 import GamePageBar from "../components/GamePageBar";
@@ -19,24 +13,26 @@ const GamePage = () => {
 
   const id = parseInt(useParams().id);
   const { data, setData } = useContext(GamesContext);
+  const navigate = useNavigate();
 
   let game = data.tabletopGames.find((game) => game.id == id);
   let owner = data.players.find((player) => player.id == game.owner);
 
   const deleteGame = async (id) => {
+    navigate("/games");
     let newGames = data.tabletopGames.filter((game) => game.id !== id);
     let newData = { ...data, tabletopGames: newGames };
+    await saveData(newData);
     setData(newData);
-    saveData(newData);
-
-    redirect("/games");
   };
 
   return (
     <View style={styles.container}>
-      <GamePageBar deleteGame={deleteGame} />
+      <GamePageBar deleteGame={deleteGame} id={game.id} />
       <Image source={{ uri: game.image }} style={styles.gameImage} />
-      <Text numberOfLines={2} style={styles.gameTitle}>{game.name}</Text>
+      <Text numberOfLines={2} style={styles.gameTitle}>
+        {game.name}
+      </Text>
       <GameStats
         minPlayers={game.minPlayers}
         maxPlayers={game.maxPlayers}
@@ -51,7 +47,7 @@ const GamePage = () => {
         <Text style={styles.gameDescription}>{game.description}</Text>
       </ScrollView>
 
-      <GameOwnerLink owner={owner}/>
+      <GameOwnerLink owner={owner} />
     </View>
   );
 };

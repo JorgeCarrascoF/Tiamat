@@ -1,7 +1,7 @@
 import { StyleSheet, View, Image, Pressable } from "react-native";
 import { Link } from "react-router-native";
 
-const GamePageBar = ({ deleteGame }) => {
+const GamePageBar = ({ deleteGame, id }) => {
   return (
     <View style={styles.row}>
       <Link to={"/games"} underlayColor={"transparent"} style={styles.link}>
@@ -10,7 +10,11 @@ const GamePageBar = ({ deleteGame }) => {
           source={require("../assets/img/arrow-left.png")}
         />
       </Link>
-      <Pressable onPress={deleteGame}>
+      <Pressable
+        onPress={() => {
+          deleteGame(id);
+        }}
+      >
         <Image
           style={styles.icon}
           source={require("../assets/img/delete.png")}

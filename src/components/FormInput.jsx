@@ -1,7 +1,7 @@
 import { View, TextInput, Pressable, Image, StyleSheet } from "react-native";
 import { COLORS } from "../utils/colors";
 
-const FormInput = ({setField, triggerAction, loading}) => {
+const FormInput = ({ setField, triggerAction, loading }) => {
   return (
     <View style={styles.inputRow}>
       <TextInput
@@ -9,6 +9,7 @@ const FormInput = ({setField, triggerAction, loading}) => {
         onChangeText={(e) => {
           setField(e);
         }}
+        onSubmitEditing={triggerAction}
       ></TextInput>
       <Pressable
         style={[

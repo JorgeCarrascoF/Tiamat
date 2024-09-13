@@ -70,6 +70,8 @@ const APIForm = () => {
       maxPlayers: chosenGame.maxPlayers,
       owner: chosenOwner,
       image: chosenGame.image,
+      duration: chosenGame.duration,
+      year: chosenGame.year,
     };
 
     let newData = { ...data };

@@ -47,7 +47,10 @@ const extractGameData = (data) => {
   let minPlayers = data.boardgames.boardgame[0].minplayers[0];
   let maxPlayers = data.boardgames.boardgame[0].maxplayers[0];
 
-  return { name, description, image, minPlayers, maxPlayers };
+  let duration = data.boardgames.boardgame[0].playingtime[0];
+  let year = data.boardgames.boardgame[0].yearpublished[0];
+
+  return { name, description, image, minPlayers, maxPlayers, duration, year };
 };
 
 export default fetchGameData;
