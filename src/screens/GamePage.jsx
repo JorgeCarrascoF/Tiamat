@@ -5,13 +5,14 @@ import {
   StyleSheet,
   Image,
   ScrollView,
-  Pressable,
 } from "react-native";
-import { Link, useParams } from "react-router-native";
+import { redirect, useParams } from "react-router-native";
 import { GamesContext } from "../navigation/Index";
 import { COLORS } from "../utils/colors";
 import GamePageBar from "../components/GamePageBar";
-import GameNumPlayersCard from "../components/GameNumPlayersCard";
+import GameStats from "../components/GameStats";
+import GameOwnerLink from "../components/GameOwnerLink";
+import saveData from "../services/saveData";
 
 const GamePage = () => {
   const [deleting, setDeleting] = useState(false);
@@ -22,27 +23,35 @@ const GamePage = () => {
   let game = data.tabletopGames.find((game) => game.id == id);
   let owner = data.players.find((player) => player.id == game.owner);
 
-  const deleteGame = () => {
-    console.log("Deleting game " + game.name);
+  const deleteGame = async (id) => {
+    let newGames = data.tabletopGames.filter((game) => game.id !== id);
+    let newData = { ...data, tabletopGames: newGames };
+    setData(newData);
+    saveData(newData);
+
+    redirect("/games");
   };
 
   return (
     <View style={styles.container}>
       <GamePageBar deleteGame={deleteGame} />
       <Image source={{ uri: game.image }} style={styles.gameImage} />
-      <Text style={styles.gameTitle}>{game.name}</Text>
+      <Text numberOfLines={2} style={styles.gameTitle}>{game.name}</Text>
+      <GameStats
+        minPlayers={game.minPlayers}
+        maxPlayers={game.maxPlayers}
+        duration={game.duration}
+        year={game.year}
+      />
+
       <ScrollView
         contentContainerStyle={{ alignItems: "center" }}
         style={styles.gameDescriptionContainer}
       >
         <Text style={styles.gameDescription}>{game.description}</Text>
       </ScrollView>
-      <View style={styles.row}>
-        <GameNumPlayersCard
-          minPlayers={game.minPlayers}
-          maxPLayers={game.maxPlayers}
-        ></GameNumPlayersCard>
-      </View>
+
+      <GameOwnerLink owner={owner}/>
     </View>
   );
 };
@@ -54,12 +63,6 @@ const styles = StyleSheet.create({
     padding: 10,
     alignItems: "center",
     marginTop: 20,
-  },
-  row: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    width: "100%",
-    marginTop: 30,
   },
   gameImage: {
     width: 280,
@@ -74,8 +77,8 @@ const styles = StyleSheet.create({
     color: COLORS.primary,
   },
   gameDescriptionContainer: {
-    maxHeight: 200,
-    marginTop: 20,
+    maxHeight: 120,
+    marginTop: 10,
     width: "100%",
   },
   gameDescription: {
