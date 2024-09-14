@@ -16,10 +16,11 @@ import AddGameQuestion from "./AddGameQuestion";
 import FormOwnerSelector from "./FormOwnerSelector";
 import { GamesContext } from "../navigation/Index";
 import saveData from "../services/saveData";
-import { redirect } from "react-router-native";
+import { useNavigate } from "react-router-native";
 
 const APIForm = () => {
   const { data, setData } = useContext(GamesContext);
+  const navigate = useNavigate();
 
   const [gameName, setGameName] = useState("");
   const [gameID, setGameID] = useState("");
@@ -80,7 +81,7 @@ const APIForm = () => {
     saveData(newData);
 
     resetForm();
-    redirect("/games");
+    navigate("/games");
   };
 
   const resetForm = () => {

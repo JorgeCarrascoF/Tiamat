@@ -1,15 +1,14 @@
 import { useContext, useState } from "react";
 import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
-import { redirect, useNavigate, useParams } from "react-router-native";
+import { useNavigate, useParams } from "react-router-native";
 import { GamesContext } from "../navigation/Index";
 import { COLORS } from "../utils/colors";
-import GamePageBar from "../components/GamePageBar";
+import PageBar from "../components/PageBar";
 import GameStats from "../components/GameStats";
 import GameOwnerLink from "../components/GameOwnerLink";
 import saveData from "../services/saveData";
 
 const GamePage = () => {
-  const [deleting, setDeleting] = useState(false);
 
   const id = parseInt(useParams().id);
   const { data, setData } = useContext(GamesContext);
@@ -28,7 +27,7 @@ const GamePage = () => {
 
   return (
     <View style={styles.container}>
-      <GamePageBar deleteGame={deleteGame} id={game.id} />
+      <PageBar deleteFunction={deleteGame} id={game.id} returnPage={'/games'} />
       <Image source={{ uri: game.image }} style={styles.gameImage} />
       <Text numberOfLines={2} style={styles.gameTitle}>
         {game.name}
