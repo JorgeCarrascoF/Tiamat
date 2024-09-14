@@ -74,6 +74,8 @@ const styles = StyleSheet.create({
     right: 10,
     bottom: 60,
     backgroundColor: COLORS.primary,
+    borderColor: 'white',
+    borderWidth: 2,
   },
   linkImage: {
     width: 50,

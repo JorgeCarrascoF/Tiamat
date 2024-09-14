@@ -19,11 +19,13 @@ const OwnerListPage = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Owners</Text>
       <ScrollView>
-        {owners.map((own) => (
-          <OwnerListCard owner={own} key={own.id}></OwnerListCard>
-        ))}
+        <Text style={styles.title}>Owners</Text>
+        <View style={styles.ownerList}>
+          {owners.map((own) => (
+            <OwnerListCard owner={own} key={own.id}></OwnerListCard>
+          ))}
+        </View>
       </ScrollView>
       <Link to={"/newowner"} style={styles.link}>
         <Image
@@ -51,7 +53,6 @@ const styles = StyleSheet.create({
     borderBottomColor: COLORS.primary,
     borderBottomWidth: 1,
     marginVertical: 15,
-
   },
   ownerList: {
     flexDirection: "row",
@@ -66,6 +67,8 @@ const styles = StyleSheet.create({
     right: 10,
     bottom: 70,
     backgroundColor: COLORS.primary,
+    borderColor: "white",
+    borderWidth: 2,
   },
   linkImage: {
     width: 50,

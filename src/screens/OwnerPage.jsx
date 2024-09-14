@@ -11,9 +11,9 @@ const OwnerPage = () => {
   const { data, setData } = useContext(GamesContext);
 
   const navigate = useNavigate();
-  
+
   let owner = data.players.find((player) => player.id === id);
-  
+
   let games = data.tabletopGames.filter((game) => game.owner === id);
   games = games.sort((a, b) => a.name.localeCompare(b.name));
 
@@ -31,7 +31,11 @@ const OwnerPage = () => {
 
   return (
     <View style={styles.container}>
-      <PageBar deleteFunction={deleteOwner} id={owner.id} returnPage={'/owners'} />
+      <PageBar
+        deleteFunction={deleteOwner}
+        id={owner.id}
+        returnPage={"/owners"}
+      />
       <View style={styles.imageContainer}>
         <Image style={styles.image} source={owner.image}></Image>
       </View>
@@ -46,7 +50,9 @@ const OwnerPage = () => {
             style={styles.gameItem}
             key={game.id}
           >
-            <Text style={styles.gameItemText} numberOfLines={1}>{game.name}</Text>
+            <Text style={styles.gameItemText} numberOfLines={1}>
+              {game.name}
+            </Text>
           </Link>
         ))}
       </ScrollView>
@@ -61,7 +67,7 @@ const styles = StyleSheet.create({
     width: "100%",
     marginTop: 80,
     marginBottom: 50,
-    marginHorizontal: 10
+    marginHorizontal: 10,
   },
   imageContainer: {
     borderWidth: 5,
@@ -94,8 +100,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   gameList: {
-    flexDirection: "row",
-    flexWrap: "wrap",
+    width: "90%",
     maxHeight: 350,
     paddingHorizontal: 16,
     paddingBottom: 20,
@@ -110,7 +115,7 @@ const styles = StyleSheet.create({
   gameItemText: {
     color: "white",
     fontWeight: "bold",
-  }
+  },
 });
 
 export default OwnerPage;

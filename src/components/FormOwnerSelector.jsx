@@ -15,6 +15,7 @@ const FormOwnerSelector = ({ selectedOwner, setOwner }) => {
       <FlatList
         data={owners}
         style={styles.ownerList}
+        numColumns={3}
         renderItem={({ item }) => {
           return (
             <OwnerCard
@@ -24,7 +25,7 @@ const FormOwnerSelector = ({ selectedOwner, setOwner }) => {
             />
           );
         }}
-      ></FlatList>
+      />
     </View>
   );
 };
@@ -48,8 +49,8 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 10,
     width: "100%",
-    flexDirection: "row",
     padding: 5,
+    maxHeight: 200,
   },
 });
 

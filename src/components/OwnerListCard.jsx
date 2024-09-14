@@ -4,19 +4,27 @@ import { Link } from "react-router-native";
 
 const OwnerListCard = ({ owner }) => {
   return (
-    <Link to={`/owner/${owner.id}`} underlayColor={'transparent'}>
-      <View style={styles.container}>
-        <View style={styles.imageContainer}>
-          <Image style={styles.image} source={owner.image} />
+    <View style={styles.container}>
+      <Link
+        style={styles.link}
+        to={`/owner/${owner.id}`}
+        underlayColor={"transparent"}
+      >
+        <View style={styles.linkContainer}>
+          <View style={styles.imageContainer}>
+            <Image style={styles.image} source={owner.image} />
+          </View>
+          <Text style={styles.text}>{owner.name}</Text>
         </View>
-        <Text style={styles.text}>{owner.name}</Text>
-      </View>
-    </Link>
+      </Link>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  container: { width: "33%", marginBottom: 15 },
+  link: { borderRadius: 250 },
+  linkContainer: {
     alignItems: "center",
   },
   imageContainer: {

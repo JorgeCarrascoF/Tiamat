@@ -42,6 +42,8 @@ const OwnerCard = ({ owner, selectedOwner, setOwner }) => {
 const styles = StyleSheet.create({
   card: {
     alignItems: "center",
+    margin: 5,
+    marginBottom: 10,
   },
   imageContainer: {
     borderWidth: 5,
@@ -49,8 +51,8 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   image: {
-    height: 100,
-    width: 100,
+    height: 80,
+    width: 80,
   },
   text: {
     fontSize: 18,
