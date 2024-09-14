@@ -9,7 +9,7 @@ const NumPlayerSelector = ({
   text,
 }) => {
   return (
-    <View style={{ alignItems: "center" }}>
+    <View style={{ alignItems: "center", width: '50%' }}>
       <Text style={styles.numPlayerSelectorTitle}>{text}</Text>
       <View style={styles.numPlayerSelectorRow}>
         <Pressable
@@ -46,7 +46,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   numPlayerSelectorRow: {
-    width: "100%",
     flexDirection: "row",
     justifyContent: "space-evenly",
     marginTop: 10,

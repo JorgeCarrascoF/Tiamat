@@ -46,7 +46,7 @@ const GameFilter = ({ games, allGames, setGames }) => {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text
         style={styles.showFilterButton}
         onPress={() => {
@@ -87,6 +87,9 @@ const GameFilter = ({ games, allGames, setGames }) => {
 };
 
 const styles = StyleSheet.create({
+  container:{
+    width: '100%',
+  },
   showFilterButton: {
     backgroundColor: COLORS.primary,
     color: "white",

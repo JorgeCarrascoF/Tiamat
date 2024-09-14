@@ -18,13 +18,13 @@ const GameListPage = () => {
 
   return (
     <View>
-      <ScrollView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.container}>
         <GameFilter
           games={games}
           allGames={data.tabletopGames}
           setGames={setGames}
         ></GameFilter>
-        <Text style={styles.gameListTitle}>Juegos: {games.length}</Text>
+        <Text style={styles.gameListTitle}>Games: {games.length}</Text>
         <View style={styles.gameList}>
           {games.map((game) => (
             <GameCard game={game} key={game.id}></GameCard>
@@ -45,13 +45,17 @@ const styles = StyleSheet.create({
   container: {
     marginBottom: 50,
     width: "100%",
-    height: "100%",
+    height: "100vh",
+    paddingBottom: 40,
+    alignItems: "center",
+    position: 'relative',
   },
   gameListTitle: {
     alingSelf: "flex-start",
     fontWeight: "bold",
     fontSize: 15,
     width: 180,
+    alignSelf: "flex-start",
     textAlign: "left",
     paddingHorizontal: 10,
     paddingVertical: 3,
@@ -74,7 +78,7 @@ const styles = StyleSheet.create({
     right: 10,
     bottom: 60,
     backgroundColor: COLORS.primary,
-    borderColor: 'white',
+    borderColor: "white",
     borderWidth: 2,
   },
   linkImage: {

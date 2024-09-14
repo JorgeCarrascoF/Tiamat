@@ -48,14 +48,15 @@ const OwnerSelector = ({ owners, filteredOwners, setFilteredOwners }) => {
 
 const styles = StyleSheet.create({
   ownerSelectorContainer: {
-    width: "80%",
+    width: "100%",
     marginTop: 20,
     marginLeft: 20,
   },
   ownerSelectorTitle: {
     textAlign: "left",
     fontSize: 18,
-    marginLeft: 15,
+    marginLeft: 40,
+
   },
   ownerSelectorRow: {
     flexDirection: "row",
