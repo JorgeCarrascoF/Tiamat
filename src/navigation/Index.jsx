@@ -21,6 +21,7 @@ import SettingsPage from "../screens/SettingsPage";
 
 export const GamesContext = createContext();
 
+
 const Index = () => {
   const [data, setData] = useState({});
 
@@ -28,6 +29,8 @@ const Index = () => {
     const loadData = async () => {
       const dataFeched = await fetchData();
       setData(dataFeched);
+      console.log('loaded')
+      console.log(dataFeched)
     };
 
     loadData();
