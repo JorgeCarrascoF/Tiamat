@@ -26,6 +26,8 @@ const PointTrackerPage = () => {
 
     const [newPlayer, setNewPlayer] = useState('');
 
+    const [startingNewGame, setStartingNewGame] = useState(false);
+
     useEffect(() => {
         if (data.tools.points.length > 0) {
             setAddingPlayers(false)
@@ -50,7 +52,8 @@ const PointTrackerPage = () => {
             let playersObjects = newAllPlayers.map((player, index) => {
                 return {
                     name: player,
-                    id: index,
+                    id: player + index,
+                    position: index,
                     points: 0
                 }
             })
@@ -65,15 +68,23 @@ const PointTrackerPage = () => {
 
     }
 
-    const updatePoints = (id, points) => {
+    const updatePoints = (position, points) => {
         let newPlayers = [...allPlayers]
-        newPlayers[id].points = points;
+        newPlayers[position].points = points;
         setAllPlayers(newPlayers);
 
         let newData = { ...data };
         newData.tools.points = newPlayers;
         setData(newData);
         saveData(newData)
+    }
+
+    const addNewPlayer = () => {
+        let newPlayers = [...allPlayers];
+        let player = { id: newPlayer + allPlayers.length, position: allPlayers.length, name: newPlayer, points: 0 }
+        newPlayers.push(player)
+
+        setAllPlayers(newPlayers)
     }
 
     const deletePlayer = (id) => {
@@ -86,6 +97,22 @@ const PointTrackerPage = () => {
         saveData(newData)
     }
 
+    const startNewGame = () => {
+        let newPlayers = [...allPlayers];
+        newPlayers = [];
+        setAllPlayers(newPlayers);
+        setAddingPlayers(true)
+
+        let newData = { ...data }
+        newData.tools.points = []
+        setData(newData)
+        saveData(newData)
+
+        setPlayers([])
+        setTextPlayers('')
+        setNewPlayer('')
+    }
+
     return (
         <View style={styles.container} >
             <Text style={styles.title}>Point Tracker</Text>
@@ -95,19 +122,38 @@ const PointTrackerPage = () => {
                 >
                     <Text style={styles.buttonText}>Start game</Text>
                 </Pressable>
-            </View> : <ScrollView style={styles.pointTrackersContainer} contentContainerStyle={{ alignItems: 'center' }}>
-                {allPlayers.map(player => (
-                    <PointTracker name={player.name} id={player.id} points={player.points} updatePoints={updatePoints} deletePlayer={deletePlayer} />
-                ))}
-                <View style={styles.newPlayer}>
-                    <TextInput onChange={(e)=>{
-                        setNewPlayer(e);
-                    }} placeholder="Add player"></TextInput>
-                    <Pressable style={styles.newPlayerButton}>
-                        <Text style={styles.newPlayerButtonText}>+</Text>
-                    </Pressable>
-                </View>
-            </ScrollView>}
+            </View> : <>
+                <ScrollView style={styles.pointTrackersContainer} contentContainerStyle={{ alignItems: 'center' }}>
+                    {allPlayers.map(player => (
+                        <PointTracker key={player.id} name={player.name} id={player.id} points={player.points} position={player.position} updatePoints={updatePoints} deletePlayer={deletePlayer} />
+                    ))}
+                    <View style={styles.newPlayer}>
+                        <TextInput style={styles.newPlayerInput} onChangeText={(e) => {
+                            setNewPlayer(e)
+                        }} placeholder="Add player"></TextInput>
+                        <Pressable style={styles.newPlayerButton} onPress={() => {
+                            if (newPlayer != '') {
+                                addNewPlayer();
+                            }
+                        }}>
+                            <Text style={styles.newPlayerButtonText}>+</Text>
+                        </Pressable>
+                    </View>
+                </ScrollView>
+
+                <Pressable style={[styles.button, { bottom: 75, right: 20 }, startingNewGame && { backgroundColor: 'red' }]} onPress={() => {
+                    if (!startingNewGame) {
+                        setStartingNewGame(true)
+                    } else {
+                        setStartingNewGame(false)
+                        startNewGame();
+                    }
+                }}>
+                    <Text style={[styles.buttonText, { fontSize: 16 }]}>{startingNewGame ? 'Are you sure?' : 'New Game'}</Text>
+                </Pressable>
+
+            </>
+            }
         </View>
     )
 }
@@ -117,6 +163,14 @@ const styles = StyleSheet.create({
         height: "100%",
         width: "100%",
         marginTop: 10,
+    },
+    row: {
+        flexDirection: 'row',
+        width: '100%',
+        justifyContent: 'center',
+        borderWidth: 1,
+        position: 'absolute',
+        bottom: 80
     },
     playersContainer: {
         height: '100%',
@@ -149,7 +203,8 @@ const styles = StyleSheet.create({
         fontSize: 18,
     },
     pointTrackersContainer: {
-        marginTop: 20
+        marginTop: 20,
+        maxHeight: '75%',
     },
     newPlayer: {
         width: '80%',
@@ -161,6 +216,9 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: COLORS.primary,
         justifyContent: 'space-between'
+    },
+    newPlayerInput: {
+        width: '90%'
     },
     newPlayerButton: {
         backgroundColor: COLORS.primary,

@@ -60,7 +60,7 @@ const DiceRollerPage = () => {
             <View style={styles.diceContainer}>
 
                 {dices.map(dice => (
-                    <Pressable onPress={() => {
+                    <Pressable key={dice.faces} onPress={() => {
                         rollDice(dice.faces)
                     }}
                         onLongPress={() => {

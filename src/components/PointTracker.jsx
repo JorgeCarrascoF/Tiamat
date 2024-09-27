@@ -3,7 +3,7 @@ import { COLORS } from "../utils/colors";
 import { useState } from "react";
 
 
-const PointTracker = ({ name, id, points, updatePoints, deletePlayer }) => {
+const PointTracker = ({ name, id, points, position, updatePoints, deletePlayer }) => {
 
     const [deleting, setDeleting] = useState(false);
 
@@ -25,13 +25,13 @@ const PointTracker = ({ name, id, points, updatePoints, deletePlayer }) => {
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Pressable style={styles.button} onPress={() => {
-                    updatePoints(id, points - 1)
+                    updatePoints(position, points - 1)
                 }}>
                     <Text style={styles.buttonText}>-</Text>
                 </Pressable >
                 <Text style={styles.points}>{points}</Text>
                 <Pressable style={styles.button} onPress={() => {
-                    updatePoints(id, points + 1)
+                    updatePoints(position, points + 1)
                 }}>
                     <Text style={styles.buttonText}>+</Text>
                 </Pressable>
