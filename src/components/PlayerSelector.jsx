@@ -155,7 +155,9 @@ const styles = StyleSheet.create({
         paddingHorizontal: 6,
         borderRadius: 50,
     },
-
+    extraPlayers: {
+        width: "90%",
+    },
     extraPlayersInput: {
         marginTop: 5,
         borderRadius: 30,
