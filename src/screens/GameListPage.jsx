@@ -45,13 +45,12 @@ const styles = StyleSheet.create({
   container: {
     marginBottom: 50,
     width: "100%",
-    height: "100vh",
+    height: "100%",
     paddingBottom: 40,
     alignItems: "center",
     position: 'relative',
   },
   gameListTitle: {
-    alingSelf: "flex-start",
     fontWeight: "bold",
     fontSize: 15,
     width: 180,
