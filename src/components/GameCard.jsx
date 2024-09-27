@@ -17,7 +17,7 @@ const GameCard = ({ game }) => {
 
 const styles = StyleSheet.create({
   cardContainer: {
-    width: "31%",
+    width: '31%',
     margin: 4,
     borderWidth: 4,
     borderColor: COLORS.primary,
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   cardText: {
-    width: "103%",
+    width: "100%",
     borderBottomLeftRadius: 5,
     borderBottomRightRadius: 5,
     position: "absolute",

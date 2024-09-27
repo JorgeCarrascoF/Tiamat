@@ -44,7 +44,7 @@ const GameListPage = () => {
 const styles = StyleSheet.create({
   container: {
     marginBottom: 50,
-    width: "100%",
+    minWidth: "100%",
     height: "100%",
     paddingBottom: 40,
     alignItems: "center",

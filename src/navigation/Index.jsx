@@ -29,8 +29,6 @@ const Index = () => {
     const loadData = async () => {
       const dataFeched = await fetchData();
       setData(dataFeched);
-      console.log('loaded')
-      console.log(dataFeched)
     };
 
     loadData();
@@ -65,6 +63,7 @@ const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight,
     backgroundColor: "#FFFFFF",
     height: "100%",
+    width: '100%',
     zIndex: 0,
     flex: 1,
     alignItems: "center",
