@@ -11,6 +11,7 @@ import {
 import { GamesContext } from "../navigation/Index";
 import { COLORS } from "../utils/colors";
 import NumPlayerSelector from "../components/NumPlayerSelector";
+import PlayerSelector from "../components/PlayerSelector";
 
 const TeamDivisorPage = () => {
   const { data } = useContext(GamesContext);
@@ -114,86 +115,8 @@ const TeamDivisorPage = () => {
       ) : (
         <>
           <Text style={styles.subtitle}>Players to add</Text>
-          <View style={styles.playerSelector}>
-            <View style={styles.selector}>
-              <FlatList
-                data={orderedPlayers}
-                horizontal={true}
-                renderItem={({ item }) => {
-                  return (
-                    <Pressable
-                      onPress={() => {
-                        if (players.includes(item.id)) {
-                          let newPlayers = players.filter((p) => p != item.id);
-                          setPlayers(newPlayers);
-                        } else {
-                          let newPlayers = [...players, item.id];
-                          setPlayers(newPlayers);
-                        }
-                      }}
-                      style={styles.selectorItem}
-                    >
-                      <Image
-                        source={item.image}
-                        style={[
-                          styles.selectorItemImage,
-                          {
-                            borderColor: players.includes(item.id)
-                              ? COLORS.primary
-                              : COLORS.terciary,
-                          },
-                        ]}
-                      />
-                      <Text
-                        style={[
-                          styles.selectorItemText,
-                          {
-                            backgroundColor: players.includes(item.id)
-                              ? COLORS.primary
-                              : COLORS.terciary,
-                          },
-                        ]}
-                      >
-                        {item.name}
-                      </Text>
-                    </Pressable>
-                  );
-                }}
-              />
-            </View>
-          </View>
-          <Text style={[styles.subtitle, { marginLeft: -5, marginTop: 20 }]}>
-            Occasional players
-          </Text>
-          <View style={styles.extraPlayers}>
-            <Text style={{ fontStyle: "italic", marginLeft: 10 }}>
-              Add occasional players sepparated by commas
-            </Text>
-            <TextInput
-              onChangeText={(e) => {
-                setTextPlayers(e);
-              }}
-              style={styles.extraPlayersInput}
-              placeholder="Player1, Player2, Player3"
-            />
-          </View>
-          <View style={styles.selected}>
-            {players.map((player) => (
-              <Pressable
-                key={player}
-                onPress={() => {
-                  let newPlayers = players.filter((p) => p != player);
-                  setPlayers(newPlayers);
-                }}
-                style={styles.selectedItem}
-              >
-                <Text style={styles.removeButton}>X</Text>
-                <Text style={styles.selectedItemText}>
-                  {data.players.find((p) => p.id == player).name}
-                </Text>
-              </Pressable>
-            ))}
-          </View>
+          <PlayerSelector orderedPlayers={orderedPlayers} setPlayers={setPlayers} players={players} textPlayers={textPlayers} setTextPlayers={setTextPlayers} />
+
           <View style={styles.teams}>
             <NumPlayerSelector
               numPlayers={teams}
