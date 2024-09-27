@@ -18,6 +18,9 @@ import TurnSelectorPage from "../screens/TurnSelectorPage";
 import TeamDivisorPage from "../screens/TeamDivisorPage";
 import PointTrackerPage from "../screens/PointTrackerPage";
 import SettingsPage from "../screens/SettingsPage";
+import ManageDataPage from '../screens/ManageDataPage'
+import PalettePage from "../screens/PalettePage";
+import AboutPage from "../screens/AboutPage";
 
 export const GamesContext = createContext();
 
@@ -52,6 +55,9 @@ const Index = () => {
           <Route path="/tools/teams" exact Component={TeamDivisorPage} />
           <Route path="/tools/points" exact Component={PointTrackerPage} />
           <Route path="/settings" exact Component={SettingsPage} />
+          <Route path="/settings/data" exact Component={ManageDataPage} />
+          <Route path="/settings/palette" exact Component={PalettePage} />
+          <Route path="/settings/about" exact Component={AboutPage} />
         </Routes>
       </GamesContext.Provider>
     </View>
