@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   container: {
     marginBottom: 50,
     minWidth: "100%",
-    height: "100%",
+    minHeight: "94%",
     paddingBottom: 40,
     alignItems: "center",
     position: 'relative',
