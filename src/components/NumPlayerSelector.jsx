@@ -31,7 +31,10 @@ const NumPlayerSelector = ({
         </Pressable>
         <Text style={styles.numPlayerSelectorPlayersText}>{numPlayers}</Text>
         <Pressable
-          style={styles.numPlayerSelectorButton}
+          style={[
+            styles.numPlayerSelectorButton,
+            { backgroundColor: COLORS[data.palette].primary },
+          ]}
           onPress={() => {
             let newPlayers = numPlayers + 1;
             if (newPlayers <= upperLimit) {
