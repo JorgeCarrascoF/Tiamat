@@ -1,11 +1,21 @@
 import { View, TextInput, Pressable, Image, StyleSheet } from "react-native";
 import { COLORS } from "../utils/colors";
+import { useContext } from "react";
+import { GamesContext } from "../navigation/Index";
 
 const FormInput = ({ setField, triggerAction, loading }) => {
+  let { data } = useContext(GamesContext);
+
   return (
     <View style={styles.inputRow}>
       <TextInput
-        style={styles.input}
+        style={[
+          styles.input,
+          {
+            borderColor: COLORS[data.palette].primary,
+            backgroundColor: COLORS[data.palette].terciary,
+          },
+        ]}
         onChangeText={(e) => {
           setField(e);
         }}
@@ -14,7 +24,7 @@ const FormInput = ({ setField, triggerAction, loading }) => {
       <Pressable
         style={[
           styles.searchButton,
-          { backgroundColor: loading ? "grey" : COLORS.primary },
+          { backgroundColor: loading ? "grey" : COLORS[data.palette].primary },
         ]}
         onPress={() => {
           triggerAction();
@@ -40,8 +50,6 @@ const styles = StyleSheet.create({
     width: "80%",
     borderRadius: 30,
     borderWidth: 2,
-    borderColor: COLORS.primary,
-    backgroundColor: COLORS.terciary,
     paddingHorizontal: 10,
   },
   searchButton: {

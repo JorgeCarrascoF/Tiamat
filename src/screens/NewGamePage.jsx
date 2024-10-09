@@ -1,19 +1,34 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import { COLORS } from "../utils/colors";
 import APIForm from "../components/APIForm";
+import { GamesContext } from "../navigation/Index";
 
 const NewGamePage = () => {
   const [addingFromAPI, setAddingFromAPI] = useState(true);
+  let { data } = useContext(GamesContext);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Añadir juego nuevo</Text>
+      <Text
+        style={[
+          styles.title,
+          {
+            color: COLORS[data.palette].primary,
+            borderBottomColor: COLORS[data.palette].primary,
+          },
+        ]}
+      >
+        Añadir juego nuevo
+      </Text>
       <Pressable
         onPress={() => {
           setAddingFromAPI(!addingFromAPI);
         }}
-        style={styles.toggleFormButton}
+        style={[
+          styles.toggleFormButton,
+          { backgroundColor: COLORS[data.palette].primary },
+        ]}
       >
         <Text style={styles.toggleFormButtonText}>
           {addingFromAPI ? "Add manually" : "Use API"}
@@ -38,13 +53,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 20,
     paddingLeft: 5,
-    color: COLORS.primary,
+
     borderBottomWidth: 2,
-    borderBottomColor: COLORS.primary,
   },
   toggleFormButton: {
     width: 110,
-    backgroundColor: COLORS.primary,
+
     paddingVertical: 5,
     paddingHorizontal: 10,
     borderRadius: 25,

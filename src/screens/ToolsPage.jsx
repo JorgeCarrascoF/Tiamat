@@ -1,6 +1,8 @@
 import { View, Text, StyleSheet, Image } from "react-native";
 import { COLORS } from "../utils/colors";
 import { Link } from "react-router-native";
+import { useContext } from "react";
+import { GamesContext } from "../navigation/Index";
 
 const tools = [
   {
@@ -26,12 +28,25 @@ const tools = [
 ];
 
 const ToolsPage = () => {
+  let { data } = useContext(GamesContext);
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tools</Text>
+      <Text
+        style={[
+          styles.title,
+          { borderBottomColor: COLORS[data.palette].primary },
+        ]}
+      >
+        Tools
+      </Text>
       <View style={styles.toolsContainer}>
         {tools.map((tool) => (
-          <Link style={styles.link} key={tool.title} underlayColor={"transparent"} to={tool.url}>
+          <Link
+            style={styles.link}
+            key={tool.title}
+            underlayColor={"transparent"}
+            to={tool.url}
+          >
             <View style={styles.linkContainer}>
               <Image style={styles.linkImage} source={tool.image} />
               <Text style={styles.linkTitle}>{tool.title}</Text>
@@ -56,7 +71,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginHorizontal: 20,
     paddingVertical: 3,
-    borderBottomColor: COLORS.primary,
+
     borderBottomWidth: 1,
     marginVertical: 15,
   },
@@ -75,8 +90,8 @@ const styles = StyleSheet.create({
   },
   linkTitle: {
     fontSize: 18,
-    marginTop: 3
-  }
+    marginTop: 3,
+  },
 });
 
 export default ToolsPage;

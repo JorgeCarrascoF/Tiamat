@@ -9,7 +9,6 @@ import GameOwnerLink from "../components/GameOwnerLink";
 import saveData from "../services/saveData";
 
 const GamePage = () => {
-
   const id = parseInt(useParams().id);
   const { data, setData } = useContext(GamesContext);
   const navigate = useNavigate();
@@ -27,9 +26,12 @@ const GamePage = () => {
 
   return (
     <View style={styles.container}>
-      <PageBar deleteFunction={deleteGame} id={game.id} returnPage={'/games'} />
+      <PageBar deleteFunction={deleteGame} id={game.id} returnPage={"/games"} />
       <Image source={{ uri: game.image }} style={styles.gameImage} />
-      <Text numberOfLines={2} style={styles.gameTitle}>
+      <Text
+        numberOfLines={2}
+        style={[styles.gameTitle, { color: COLORS[data.palette].primary }]}
+      >
         {game.name}
       </Text>
       <GameStats
@@ -69,7 +71,6 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: "bold",
     textAlign: "center",
-    color: COLORS.primary,
   },
   gameDescriptionContainer: {
     maxHeight: 120,

@@ -1,5 +1,7 @@
 import { View, Pressable, Text, StyleSheet } from "react-native";
 import { COLORS } from "../utils/colors";
+import { useContext } from "react";
+import { GamesContext } from "../navigation/Index";
 
 const NumPlayerSelector = ({
   numPlayers,
@@ -8,12 +10,16 @@ const NumPlayerSelector = ({
   setNumPlayers,
   text,
 }) => {
+  let { data } = useContext(GamesContext);
   return (
-    <View style={{ alignItems: "center", width: '50%' }}>
+    <View style={{ alignItems: "center", width: "50%" }}>
       <Text style={styles.numPlayerSelectorTitle}>{text}</Text>
       <View style={styles.numPlayerSelectorRow}>
         <Pressable
-          style={styles.numPlayerSelectorButton}
+          style={[
+            styles.numPlayerSelectorButton,
+            { backgroundColor: COLORS[data.palette].primary },
+          ]}
           onPress={() => {
             let newPlayers = numPlayers - 1;
             if (newPlayers >= lowerLimit) {
@@ -52,7 +58,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   numPlayerSelectorButton: {
-    backgroundColor: COLORS.primary,
     color: "white",
     width: 25,
     borderRadius: 15,

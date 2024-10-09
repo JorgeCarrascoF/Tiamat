@@ -1,7 +1,10 @@
 import { Pressable, StyleSheet, View, Text } from "react-native";
 import { COLORS } from "../utils/colors";
+import { useContext } from "react";
+import { GamesContext } from "../navigation/Index";
 
 const OwnerSelector = ({ owners, filteredOwners, setFilteredOwners }) => {
+  let {data} = useContext(GamesContext)
   const addOrRemoveFromFilter = (id) => {
     if (filteredOwners.includes(id)) {
       let newFilteredOwners = filteredOwners.filter((o) => o != id);
@@ -28,12 +31,13 @@ const OwnerSelector = ({ owners, filteredOwners, setFilteredOwners }) => {
               style={[
                 styles.ownerButtonText,
                 {
+                  borderColor: COLORS[data.palette].primary,
                   backgroundColor: filteredOwners.includes(owner.id)
-                    ? COLORS.primary
+                    ? COLORS[data.palette].primary
                     : "white",
                   color: filteredOwners.includes(owner.id)
                     ? "white"
-                    : COLORS.primary,
+                    : COLORS[data.palette].primary,
                 },
               ]}
             >
@@ -56,7 +60,6 @@ const styles = StyleSheet.create({
     textAlign: "left",
     fontSize: 18,
     marginLeft: 40,
-
   },
   ownerSelectorRow: {
     flexDirection: "row",
@@ -75,7 +78,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     borderWidth: 2,
     borderRadius: 5,
-    borderColor: COLORS.primary,
   },
 });
 

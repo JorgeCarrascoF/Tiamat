@@ -48,7 +48,7 @@ const GameFilter = ({ games, allGames, setGames }) => {
   return (
     <View style={styles.container}>
       <Text
-        style={styles.showFilterButton}
+        style={[styles.showFilterButton, {    backgroundColor: COLORS[data.palette].primary,}]}
         onPress={() => {
           setFiltering(!filtering);
           setGames(allGames);
@@ -91,7 +91,6 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   showFilterButton: {
-    backgroundColor: COLORS.primary,
     color: "white",
     fontWeight: "bold",
     alignSelf: "flex-end",
@@ -115,33 +114,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     marginTop: 10,
     alignItems: "center",
-  },
-  filterButton: {
-    backgroundColor: COLORS.primary,
-    color: "white",
-    width: 25,
-    borderRadius: 15,
-    textAlign: "center",
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: 20,
-  },
-  filterButtonText: {
-    width: "100%",
-    textAlign: "center",
-    borderRadius: 15,
-    color: "white",
-    fontSize: 18,
-    paddingBottom: 1,
-  },
-  filterPlayersText: {
-    textAlign: "center",
-    fontSize: 20,
-    marginHorizontal: 5,
-    borderWidth: 1,
-    borderRadius: 5,
-    paddingHorizontal: 4,
-    paddingVertical: 1,
   },
 });
 

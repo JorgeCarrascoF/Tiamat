@@ -2,63 +2,35 @@ import { StyleSheet } from "react-native";
 import { Text, View } from "react-native";
 import { COLORS } from "../utils/colors";
 import PaletteCard from "../components/PaletteCard";
+import { useContext } from "react";
+import { GamesContext } from "../navigation/Index";
+import saveData from "../services/saveData";
 
 const PalettePage = () => {
+  let { data, setData } = useContext(GamesContext);
 
-    const setPalette = (id) => {
-        console.log('palette chosen ', id)
-
-    }
+  const setPalette = async (id) => {
+    let newData = { ...data, palette: id };
+    await saveData(newData);
+    setData(newData);
+  };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Change color palette</Text>
+      <Text style={[styles.title, {    borderBottomColor: COLORS[data.palette].primary,}]}>Change color palette</Text>
       <View style={styles.palettes}>
-        <PaletteCard
-          name={"Waving Blue"}
-          id={0}
-          primary={COLORS.primary}
-          secondary={COLORS.secondary}
-          terciary={COLORS.terciary}
-          setPalette={setPalette}
-          selected={true}
-        />
-        <PaletteCard
-          name={"Red String"}
-          primary={"#e25858"}
-          secondary={"#ed8080"}
-          terciary={"#e8aeae"}
-          id={1}
-          setPalette={setPalette}
-          selected={false}
-        />
-        <PaletteCard
-          name={"Green Leaf"}
-          primary={"#58e276"}
-          secondary={"#80ed9c"}
-          terciary={"#aee8c3"}
-          id={2}
-          setPalette={setPalette}
-          selected={false}
-        />
-        <PaletteCard
-          name={"Bewitched"}
-          primary={"#8a58e2"}
-          secondary={"#a680ed"}
-          terciary={"#c0aee8"}
-          id={3}
-          setPalette={setPalette}
-          selected={false}
-        />
-        <PaletteCard
-          name={"Coral Riff"}
-          primary={"#e258a9"}
-          secondary={"#ed80c3"}
-          terciary={"#e8aed3"}
-          id={4}
-          setPalette={setPalette}
-          selected={false}
-        />
+        {COLORS.map((palette, index) => (
+          <PaletteCard
+            name={palette.name}
+            key={index}
+            primary={palette.primary}
+            secondary={palette.secondary}
+            terciary={palette.terciary}
+            id={index}
+            setPalette={setPalette}
+            selected={data.palette === index}
+          />
+        ))}
       </View>
     </View>
   );
@@ -80,15 +52,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginHorizontal: 20,
     paddingVertical: 3,
-    borderBottomColor: COLORS.primary,
+
     borderBottomWidth: 1,
     marginTop: 10,
   },
   palettes: {
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: 'space-evenly',
-    height: '80%'
+    justifyContent: "space-evenly",
+    height: "80%",
   },
 });
 

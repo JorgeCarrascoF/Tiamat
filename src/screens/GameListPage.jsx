@@ -24,14 +24,21 @@ const GameListPage = () => {
           allGames={data.tabletopGames}
           setGames={setGames}
         ></GameFilter>
-        <Text style={styles.gameListTitle}>Games: {games.length}</Text>
+        <Text
+          style={[styles.gameListTitle, { borderBottomColor: COLORS[data.palette].primary }]}
+        >
+          Games: {games.length}
+        </Text>
         <View style={styles.gameList}>
           {games.map((game) => (
             <GameCard game={game} key={game.id}></GameCard>
           ))}
         </View>
       </ScrollView>
-      <Link to={"/newgame"} style={styles.link}>
+      <Link
+        to={"/newgame"}
+        style={[styles.link, { backgroundColor: COLORS[data.palette].primary }]}
+      >
         <Image
           source={require("../assets/img/plus.png")}
           style={styles.linkImage}
@@ -48,7 +55,7 @@ const styles = StyleSheet.create({
     minHeight: "94%",
     paddingBottom: 40,
     alignItems: "center",
-    position: 'relative',
+    position: "relative",
   },
   gameListTitle: {
     fontWeight: "bold",
@@ -58,7 +65,7 @@ const styles = StyleSheet.create({
     textAlign: "left",
     paddingHorizontal: 10,
     paddingVertical: 3,
-    borderBottomColor: COLORS.primary,
+
     borderBottomWidth: 1,
     marginTop: 20,
     marginLeft: 20,
@@ -76,7 +83,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     right: 10,
     bottom: 60,
-    backgroundColor: COLORS.primary,
+
     borderColor: "white",
     borderWidth: 2,
   },

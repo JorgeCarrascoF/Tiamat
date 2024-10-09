@@ -10,7 +10,7 @@ const FormOwnerSelector = ({ selectedOwner, setOwner }) => {
   let owners = data.players;
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {    backgroundColor: COLORS[data.palette].primary,}]}>
       <Text style={styles.title}>Select owner</Text>
       <FlatList
         data={owners}
@@ -32,7 +32,6 @@ const FormOwnerSelector = ({ selectedOwner, setOwner }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: COLORS.primary,
     width: "100%",
     padding: 10,
     marginTop: 15,

@@ -1,8 +1,11 @@
 import { StyleSheet, View, Text, Image } from "react-native";
 import { COLORS } from "../utils/colors";
 import { Link } from "react-router-native";
+import { useContext } from "react";
+import { GamesContext } from "../navigation/Index";
 
 const OwnerListCard = ({ owner }) => {
+  let {data} = useContext(GamesContext)
   return (
     <View style={styles.container}>
       <Link
@@ -11,10 +14,14 @@ const OwnerListCard = ({ owner }) => {
         underlayColor={"transparent"}
       >
         <View style={styles.linkContainer}>
-          <View style={styles.imageContainer}>
+          <View
+            style={[styles.imageContainer, { borderColor: COLORS[data.palette].primary }]}
+          >
             <Image style={styles.image} source={owner.image} />
           </View>
-          <Text style={styles.text}>{owner.name}</Text>
+          <Text style={[styles.text, { backgroundColor: COLORS[data.palette].primary }]}>
+            {owner.name}
+          </Text>
         </View>
       </Link>
     </View>
@@ -29,7 +36,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     borderWidth: 5,
-    borderColor: COLORS.primary,
+
     borderRadius: 100,
     overflow: "hidden",
   },
@@ -43,7 +50,6 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     paddingVertical: 2,
     paddingHorizontal: 15,
-    backgroundColor: COLORS.primary,
     fontWeight: "bold",
     color: "white",
   },

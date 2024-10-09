@@ -70,14 +70,26 @@ const TeamDivisorPage = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Team divisor</Text>
+      <Text style={[styles.title, { borderBottomColor: COLORS[data.palette].primary }]}>
+        Team divisor
+      </Text>
       {teamsCreated ? (
         <View style={styles.teamsCreatedView}>
           <View style={styles.teamsContainer}>
             <Text style={[styles.subtitle, { marginBottom: 10 }]}>Teams</Text>
             {teamsList.map((team, index) => (
-              <View key={index} style={styles.team}>
-                <Text style={styles.teamName}>Equipo {index + 1}</Text>
+              <View
+                key={index}
+                style={[styles.team, { borderColor: COLORS[data.palette].primary }]}
+              >
+                <Text
+                  style={[
+                    styles.teamName,
+                    { color: COLORS[data.palette].primary, borderColor: COLORS[data.palette].primary },
+                  ]}
+                >
+                  Equipo {index + 1}
+                </Text>
                 {team.map((player, index) => {
                   return (
                     <Text key={index} style={styles.teamPlayer}>
@@ -91,14 +103,17 @@ const TeamDivisorPage = () => {
           <View style={styles.buttonContainer}>
             <Pressable
               onPress={createTeams}
-              style={[styles.button, { marginTop: 10 }]}
+              style={[
+                styles.button,
+                { marginTop: 10, backgroundColor: COLORS[data.palette].primary },
+              ]}
             >
               <Text style={styles.teamsButtonText}>Team again!</Text>
             </Pressable>
             <Pressable
               style={[
                 styles.button,
-                { marginTop: 10, backgroundColor: "#BEBEBE" },
+                { marginTop: 10, backgroundColor: COLORS[data.palette].primary },
               ]}
             >
               <Text
@@ -115,7 +130,13 @@ const TeamDivisorPage = () => {
       ) : (
         <>
           <Text style={styles.subtitle}>Players to add</Text>
-          <PlayerSelector orderedPlayers={orderedPlayers} setPlayers={setPlayers} players={players} textPlayers={textPlayers} setTextPlayers={setTextPlayers} />
+          <PlayerSelector
+            orderedPlayers={orderedPlayers}
+            setPlayers={setPlayers}
+            players={players}
+            textPlayers={textPlayers}
+            setTextPlayers={setTextPlayers}
+          />
 
           <View style={styles.teams}>
             <NumPlayerSelector
@@ -128,7 +149,10 @@ const TeamDivisorPage = () => {
           </View>
           <Pressable
             onPress={createTeams}
-            style={[styles.button, { marginTop: 30 }]}
+            style={[
+              styles.button,
+              { marginTop: 30, backgroundColor: COLORS[data.palette].primary },
+            ]}
           >
             <Text style={styles.teamsButtonText}>Team up!</Text>
           </Pressable>
@@ -161,7 +185,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginHorizontal: 20,
     paddingVertical: 3,
-    borderBottomColor: COLORS.primary,
+
     borderBottomWidth: 1,
     marginTop: 15,
   },
@@ -179,7 +203,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   teamsButton: {
-    backgroundColor: COLORS.primary,
     paddingVertical: 5,
     paddingHorizontal: 15,
     borderRadius: 15,
@@ -199,7 +222,7 @@ const styles = StyleSheet.create({
     width: "45%",
     borderWidth: 1,
     borderRadius: 15,
-    borderColor: COLORS.primary,
+
     padding: 10,
   },
   teamName: {
@@ -208,8 +231,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     borderBottomWidth: 1,
-    color: COLORS.primary,
-    borderColor: COLORS.primary,
+
     marginBottom: 10,
   },
   buttonContainer: {
@@ -221,7 +243,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   button: {
-    backgroundColor: COLORS.primary,
     paddingVertical: 10,
     paddingHorizontal: 18,
     borderRadius: 15,

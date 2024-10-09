@@ -1,6 +1,8 @@
 import { View, StyleSheet } from "react-native";
 import AppBarButton from "./AppBarButton";
 import { COLORS } from "../utils/colors";
+import { useContext } from "react";
+import { GamesContext } from "../navigation/Index";
 
 const links = [
   { path: "/", name: "Home", icon: require("../assets/img/appbar/home.png") },
@@ -11,8 +13,11 @@ const links = [
 ];
 
 const AppBar = () => {
+
+  const {data} = useContext(GamesContext)
+
   return (
-    <View style={styles.appbar}>
+    <View style={[styles.appbar, {backgroundColor: COLORS[data.palette].primary}]}>
       {links.map((link) => (
         <AppBarButton
           key={link.path}
@@ -29,7 +34,6 @@ const styles = StyleSheet.create({
     appbar: {
         width: '100%',
         height: 50,
-        backgroundColor: COLORS.primary,	
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         alignItems: 'center',

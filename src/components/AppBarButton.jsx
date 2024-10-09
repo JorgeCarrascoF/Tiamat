@@ -1,12 +1,15 @@
 import { View, Image, Text, StyleSheet } from "react-native";
 import { Link, useLocation } from "react-router-native";
 import { COLORS } from "../utils/colors";
+import { useContext } from "react";
+import { GamesContext } from "../navigation/Index";
 
 const AppBarButton = ({ path, name, icon }) => {
     let currentPath = useLocation().pathname;
+    let {data} = useContext(GamesContext)
 
     const containerStyle = {
-        backgroundColor: currentPath === path ? COLORS.secondary : "transparent",
+        backgroundColor: currentPath === path ? COLORS[data.palette].secondary : "transparent",
     };
   return (
     <Link to={path} underlayColor={'transparent'} style={styles.link}>

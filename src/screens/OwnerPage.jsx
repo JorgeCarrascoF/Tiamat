@@ -36,18 +36,22 @@ const OwnerPage = () => {
         id={owner.id}
         returnPage={"/owners"}
       />
-      <View style={styles.imageContainer}>
+      <View style={[styles.imageContainer, { borderColor: COLORS[data.palette].primary }]}>
         <Image style={styles.image} source={owner.image}></Image>
       </View>
-      <Text style={styles.ownerName}>{owner.name}</Text>
+      <Text style={[styles.ownerName, { backgroundColor: COLORS[data.palette].primary }]}>
+        {owner.name}
+      </Text>
 
-      <Text style={styles.text}>Games: {games.length}</Text>
+      <Text style={[styles.text, { borderBottomColor: COLORS[data.palette].primary }]}>
+        Games: {games.length}
+      </Text>
       <ScrollView style={styles.gameList}>
         {games.map((game) => (
           <Link
             to={`/game/${game.id}`}
             underlayColor={"transparent"}
-            style={styles.gameItem}
+            style={[styles.gameItem, { backgroundColor: COLORS[data.palette].secondary }]}
             key={game.id}
           >
             <Text style={styles.gameItemText} numberOfLines={1}>
@@ -71,7 +75,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     borderWidth: 5,
-    borderColor: COLORS.primary,
+
     borderRadius: 200,
     overflow: "hidden",
   },
@@ -85,12 +89,11 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     paddingVertical: 2,
     paddingHorizontal: 15,
-    backgroundColor: COLORS.primary,
+
     fontWeight: "bold",
     color: "white",
   },
   text: {
-    borderBottomColor: COLORS.primary,
     borderBottomWidth: 1,
     width: 300,
     textAlign: "left",
@@ -110,7 +113,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     borderRadius: 15,
     marginVertical: 3,
-    backgroundColor: COLORS.secondary,
   },
   gameItemText: {
     color: "white",

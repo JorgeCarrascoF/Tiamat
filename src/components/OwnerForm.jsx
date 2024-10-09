@@ -35,22 +35,24 @@ const OwnerForm = () => {
     newData.players.push(owner);
     setData(newData);
     saveData(newData);
-    
+
     navigate("/owners");
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.fieldTitle}>Name</Text>
+      <Text style={[styles.fieldTitle, { color: COLORS[data.palette].primary }]}>Name</Text>
       <TextInput
-        style={styles.field}
+        style={[styles.field, { borderColor: COLORS[data.palette].primary }]}
         onChangeText={(e) => {
           setName(e);
         }}
         placeholder="Player"
       />
-      <Text style={styles.fieldTitle}>Image</Text>
-      <View style={styles.field}>
+      <Text style={[styles.fieldTitle, { borderBottomColor: COLORS[data.palette].primary }]}>
+        Image
+      </Text>
+      <View style={[styles.field, { borderColor: COLORS[data.palette].primary }]}>
         <FlatList
           numColumns={3}
           data={avatarsArray}
@@ -64,8 +66,8 @@ const OwnerForm = () => {
                   {
                     borderColor:
                       selectedAvatar === item.id
-                        ? COLORS.primary
-                        : COLORS.terciary,
+                        ? COLORS[data.palette].primary
+                        : COLORS[data.palette].terciary,
                   },
                 ]}
                 onPress={() => setSelectedAvatar(item.id)}
@@ -75,7 +77,10 @@ const OwnerForm = () => {
               {selectedAvatar === item.id && (
                 <Image
                   source={require("../assets/img/check.png")}
-                  style={styles.selectedAvatar}
+                  style={[
+                    styles.selectedAvatar,
+                    { backgroundColor: COLORS[data.palette].primary },
+                  ]}
                 />
               )}
             </View>
@@ -86,8 +91,8 @@ const OwnerForm = () => {
         style={[
           styles.saveButton,
           name !== "" && selectedAvatar !== null
-            ? { backgroundColor: COLORS.primary }
-            : { backgroundColor: COLORS.terciary },
+            ? { backgroundColor: COLORS[data.palette].primary }
+            : { backgroundColor: COLORS[data.palette].terciary },
         ]}
         onPress={() => {
           if (name !== "" && selectedAvatar !== null) {
@@ -113,14 +118,12 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginTop: 20,
     paddingLeft: 5,
-    color: COLORS.primary,
-    borderBottomColor: COLORS.primary,
   },
   field: {
     borderWidth: 3,
     overflow: "hidden",
     width: "100%",
-    borderColor: COLORS.primary,
+
     borderRadius: 10,
     paddingVertical: 2,
     paddingHorizontal: 10,
@@ -140,7 +143,7 @@ const styles = StyleSheet.create({
   },
   selectedAvatar: {
     position: "absolute",
-    backgroundColor: COLORS.primary,
+
     borderRadius: 50,
     bottom: 0,
     right: "38%",

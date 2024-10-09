@@ -112,6 +112,7 @@ const APIForm = () => {
           style={[
             styles.gameListContainer,
             {
+              borderColor: COLORS[data.palette].primary,
               maxHeight: chosenGame == null ? 400 : 200,
             },
           ]}
@@ -124,7 +125,7 @@ const APIForm = () => {
                   styles.gameListItem,
                   {
                     backgroundColor:
-                      gameName == item ? COLORS.primary : COLORS.terciary,
+                      gameName == item ? COLORS[data.palette].primary : COLORS[data.palette].terciary,
                   },
                 ]}
                 onPress={() => {
@@ -147,7 +148,7 @@ const APIForm = () => {
       )}
       {chosenGame != null && (
         <View style={styles.gameInfoContainer}>
-          <SearchedGameInfoCard data={chosenGame} />
+          <SearchedGameInfoCard gameData={chosenGame} />
           {!choosingOwner && (
             <AddGameQuestion
               gameName={chosenGame.name}
@@ -165,7 +166,7 @@ const APIForm = () => {
       )}
       {chosenOwner !== "" && (
         <Pressable
-          style={styles.saveGameButton}
+          style={[styles.saveGameButton, { backgroundColor: COLORS[data.palette].primary }]}
           onPress={() => {
             saveGameAndOwner();
           }}
@@ -187,7 +188,6 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     borderWidth: 2,
     borderRadius: 10,
-    borderColor: COLORS.primary,
   },
   gameListItem: {
     paddingVertical: 4,
@@ -202,7 +202,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   saveGameButton: {
-    backgroundColor: COLORS.primary,
     padding: 10,
     borderRadius: 5,
     marginTop: 10,

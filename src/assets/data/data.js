@@ -22,6 +22,7 @@ const appData = {
     points: [],
     bigPoints: [],
   },
+  palette: 0
 };
 
 export default appData;

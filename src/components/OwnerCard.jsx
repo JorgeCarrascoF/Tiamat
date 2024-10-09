@@ -1,7 +1,10 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { COLORS } from "../utils/colors";
+import { useContext } from "react";
+import { GamesContext } from "../navigation/Index";
 
 const OwnerCard = ({ owner, selectedOwner, setOwner }) => {
+  let { data } = useContext(GamesContext);
   return (
     <Pressable
       style={styles.card}
@@ -18,7 +21,9 @@ const OwnerCard = ({ owner, selectedOwner, setOwner }) => {
           styles.imageContainer,
           {
             borderColor:
-              selectedOwner === owner.id ? COLORS.primary : COLORS.terciary,
+              selectedOwner === owner.id
+                ? COLORS[data.palette].primary
+                : COLORS[data.palette].terciary,
           },
         ]}
       >
@@ -29,7 +34,9 @@ const OwnerCard = ({ owner, selectedOwner, setOwner }) => {
           styles.text,
           {
             backgroundColor:
-              selectedOwner === owner.id ? COLORS.primary : COLORS.terciary,
+              selectedOwner === owner.id
+                ? COLORS[data.palette].primary
+                : COLORS[data.palette].terciary,
           },
         ]}
       >

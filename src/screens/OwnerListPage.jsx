@@ -20,14 +20,24 @@ const OwnerListPage = () => {
   return (
     <View style={styles.container}>
       <ScrollView>
-        <Text style={styles.title}>Owners</Text>
+        <Text
+          style={[
+            styles.title,
+            { borderBottomColor: COLORS[data.palette].primary },
+          ]}
+        >
+          Owners
+        </Text>
         <View style={styles.ownerList}>
           {owners.map((own) => (
             <OwnerListCard owner={own} key={own.id}></OwnerListCard>
           ))}
         </View>
       </ScrollView>
-      <Link to={"/newowner"} style={styles.link}>
+      <Link
+        to={"/newowner"}
+        style={[styles.link, { backgroundColor: COLORS[data.palette].primary }]}
+      >
         <Image
           source={require("../assets/img/plus.png")}
           style={styles.linkImage}
@@ -50,7 +60,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginHorizontal: 20,
     paddingVertical: 3,
-    borderBottomColor: COLORS.primary,
+
     borderBottomWidth: 1,
     marginVertical: 15,
   },
@@ -66,7 +76,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     right: 10,
     bottom: 70,
-    backgroundColor: COLORS.primary,
+
     borderColor: "white",
     borderWidth: 2,
   },

@@ -1,5 +1,4 @@
 import { View, Text, StyleSheet } from "react-native";
-import { COLORS } from "../utils/colors";
 import GameChip from "./GameChip";
 
 const GameStats = ({ minPlayers, maxPlayers, duration, year }) => {
@@ -32,14 +31,6 @@ const styles = StyleSheet.create({
     width: "100%",
     marginTop: 15,
     marginBottom: 20,
-  },
-  textContainer: {
-    backgroundColor: COLORS.primary,
-    color: "white",
-    fontWeight: "bold",
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    borderRadius: 10,
   },
 });
 
