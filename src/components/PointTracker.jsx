@@ -2,6 +2,7 @@ import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { COLORS } from "../utils/colors";
 import { useContext, useState } from "react";
 import { GamesContext } from "../navigation/Index";
+import Svg, { Path } from "react-native-svg";
 
 const PointTracker = ({
   name,
@@ -33,10 +34,14 @@ const PointTracker = ({
               setDeleting(true);
             }}
           >
-            <Image
+            <Svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
               style={styles.deleteImage}
-              source={require("../assets/img/delete.png")}
-            />
+              fill={COLORS[data.palette].primary}
+            >
+              <Path d="M19 4h-3.5l-1-1h-5l-1 1H5v2h14M6 19a2 2 0 002 2h8a2 2 0 002-2V7H6v12z" />
+            </Svg>
           </Pressable>
         )}
         <Text style={styles.playerName}>{name}</Text>

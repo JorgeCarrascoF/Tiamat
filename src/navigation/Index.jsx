@@ -18,12 +18,11 @@ import TurnSelectorPage from "../screens/TurnSelectorPage";
 import TeamDivisorPage from "../screens/TeamDivisorPage";
 import PointTrackerPage from "../screens/PointTrackerPage";
 import SettingsPage from "../screens/SettingsPage";
-import ManageDataPage from '../screens/ManageDataPage'
+import ManageDataPage from "../screens/ManageDataPage";
 import PalettePage from "../screens/PalettePage";
 import AboutPage from "../screens/AboutPage";
 
 export const GamesContext = createContext();
-
 
 const Index = () => {
   const [data, setData] = useState({});
@@ -69,7 +68,7 @@ const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight,
     backgroundColor: "#FFFFFF",
     height: "100%",
-    width: '100%',
+    width: "100%",
     zIndex: 0,
     flex: 1,
     alignItems: "center",

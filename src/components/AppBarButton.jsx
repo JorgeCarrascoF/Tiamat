@@ -9,7 +9,7 @@ const AppBarButton = ({ path, name, icon }) => {
     let {data} = useContext(GamesContext)
 
     const containerStyle = {
-        backgroundColor: currentPath === path ? COLORS[data.palette].secondary : "transparent",
+        backgroundColor: currentPath === path ? Object.values(data).length > 0 ? COLORS[data.palette].secondary : COLORS[0].secondary : "transparent",
     };
   return (
     <Link to={path} underlayColor={'transparent'} style={styles.link}>
