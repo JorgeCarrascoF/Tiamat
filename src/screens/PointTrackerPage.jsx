@@ -192,6 +192,7 @@ const PointTrackerPage = () => {
             style={[
               styles.button,
               { bottom: 75, right: 20 },
+              { backgroundColor: COLORS[data.palette].primary },
               startingNewGame && { backgroundColor: "red" },
             ]}
             onPress={() => {

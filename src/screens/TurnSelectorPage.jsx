@@ -40,7 +40,7 @@ const TurnSelectorPage = () => {
   return (
     <View style={styles.container}>
       <Text style={[styles.title, { borderBottomColor: COLORS[data.palette].primary }]}>
-        TurnSelectorPage
+        First Turn Selector
       </Text>
       <PlayerSelector
         orderedPlayers={orderedPlayers}

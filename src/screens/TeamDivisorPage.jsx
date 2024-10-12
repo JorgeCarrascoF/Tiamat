@@ -71,7 +71,7 @@ const TeamDivisorPage = () => {
   return (
     <View style={styles.container}>
       <Text style={[styles.title, { borderBottomColor: COLORS[data.palette].primary }]}>
-        Team divisor
+        Team Divisor
       </Text>
       {teamsCreated ? (
         <View style={styles.teamsCreatedView}>

@@ -72,7 +72,7 @@ const DiceRollerPage = () => {
           { borderBottomColor: COLORS[data.palette].primary },
         ]}
       >
-        Dice roller
+        Dice Roller
       </Text>
       <Text style={styles.note}>
         Press for one dice, long press for two dice
