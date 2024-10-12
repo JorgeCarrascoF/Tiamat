@@ -5,6 +5,7 @@ import { GamesContext } from "../navigation/Index";
 import OwnerListCard from "../components/OwnerListCard";
 import { COLORS } from "../utils/colors";
 import { Link } from "react-router-native";
+import Svg, {Path} from "react-native-svg";
 
 const OwnerListPage = () => {
   const { data } = useContext(GamesContext);
@@ -38,10 +39,14 @@ const OwnerListPage = () => {
         to={"/newowner"}
         style={[styles.link, { backgroundColor: COLORS[data.palette].primary }]}
       >
-        <Image
-          source={require("../assets/img/plus.png")}
+        <Svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
           style={styles.linkImage}
-        />
+          fill={"#FFFFFF"}
+        >
+          <Path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+        </Svg>
       </Link>
     </View>
   );

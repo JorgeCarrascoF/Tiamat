@@ -14,6 +14,7 @@ import { useContext, useState } from "react";
 import { GamesContext } from "../navigation/Index";
 import saveData from "../services/saveData";
 import { useNavigate } from "react-router-native";
+import Svg, {Path} from "react-native-svg";
 
 const OwnerForm = () => {
   const { data, setData } = useContext(GamesContext);
@@ -41,7 +42,11 @@ const OwnerForm = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={[styles.fieldTitle, { color: COLORS[data.palette].primary }]}>Name</Text>
+      <Text
+        style={[styles.fieldTitle, { color: COLORS[data.palette].primary }]}
+      >
+        Name
+      </Text>
       <TextInput
         style={[styles.field, { borderColor: COLORS[data.palette].primary }]}
         onChangeText={(e) => {
@@ -49,10 +54,17 @@ const OwnerForm = () => {
         }}
         placeholder="Player"
       />
-      <Text style={[styles.fieldTitle, { borderBottomColor: COLORS[data.palette].primary }]}>
+      <Text
+        style={[
+          styles.fieldTitle,
+          { borderBottomColor: COLORS[data.palette].primary },
+        ]}
+      >
         Image
       </Text>
-      <View style={[styles.field, { borderColor: COLORS[data.palette].primary }]}>
+      <View
+        style={[styles.field, { borderColor: COLORS[data.palette].primary }]}
+      >
         <FlatList
           numColumns={3}
           data={avatarsArray}
@@ -75,13 +87,17 @@ const OwnerForm = () => {
                 <Image source={item.src} style={styles.avatarImage} />
               </Pressable>
               {selectedAvatar === item.id && (
-                <Image
-                  source={require("../assets/img/check.png")}
+                <Svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
                   style={[
                     styles.selectedAvatar,
                     { backgroundColor: COLORS[data.palette].primary },
                   ]}
-                />
+                  fill={'#FFFFFF'}
+                >
+                  <Path d="M9 20.42l-6.21-6.21 2.83-2.83L9 14.77l9.88-9.89 2.83 2.83L9 20.42z" />
+                </Svg>
               )}
             </View>
           )}

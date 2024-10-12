@@ -2,6 +2,7 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import { COLORS } from "../utils/colors";
 import { useContext } from "react";
 import { GamesContext } from "../navigation/Index";
+import Svg from "react-native-svg";
 
 const GameChip = ({ icon, title, stat }) => {
   let { data } = useContext(GamesContext);
@@ -15,7 +16,9 @@ const GameChip = ({ icon, title, stat }) => {
         },
       ]}
     >
-      <Image style={styles.icon} source={icon}></Image>
+    <Svg xmlns="http://www.w3.org/2000/svg" fill={'#FFFFFF'} viewBox="0 0 24 24" style={styles.icon}>
+      {icon}
+    </Svg>
       <Text style={styles.text}>{title}: </Text>
       <Text style={styles.text}>{stat}</Text>
     </View>

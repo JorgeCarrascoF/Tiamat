@@ -48,7 +48,10 @@ const PointTracker = ({
       </View>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <Pressable
-          style={styles.button}
+          style={[
+            styles.button,
+            { backgroundColor: COLORS[data.palette].primary },
+          ]}
           onPress={() => {
             updatePoints(position, points - 1);
           }}

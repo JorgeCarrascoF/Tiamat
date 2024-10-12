@@ -5,6 +5,7 @@ import { COLORS } from "../utils/colors";
 import GameCard from "../components/GameCard";
 import GameFilter from "../components/GameFilter";
 import { Link } from "react-router-native";
+import Svg, { Path } from "react-native-svg";
 
 const GameListPage = () => {
   const { data } = useContext(GamesContext);
@@ -25,7 +26,10 @@ const GameListPage = () => {
           setGames={setGames}
         ></GameFilter>
         <Text
-          style={[styles.gameListTitle, { borderBottomColor: COLORS[data.palette].primary }]}
+          style={[
+            styles.gameListTitle,
+            { borderBottomColor: COLORS[data.palette].primary },
+          ]}
         >
           Games: {games.length}
         </Text>
@@ -39,10 +43,14 @@ const GameListPage = () => {
         to={"/newgame"}
         style={[styles.link, { backgroundColor: COLORS[data.palette].primary }]}
       >
-        <Image
-          source={require("../assets/img/plus.png")}
+        <Svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
           style={styles.linkImage}
-        />
+          fill={"#FFFFFF"}
+        >
+          <Path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+        </Svg>
       </Link>
     </View>
   );
