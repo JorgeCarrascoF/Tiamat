@@ -71,10 +71,25 @@ const TrendingGame = () => {
               ]}
               source={{ uri: trendingGame.thumbnail }}
             />
-            <Text style={styles.gameCardText}>{trendingGame.name}</Text>
+            <View style={styles.gameCardInfo}>
+              <Text style={styles.gameCardText}>{trendingGame.name}</Text>
+              <Pressable
+                style={[
+                  styles.moreInfo,
+                  {
+                    backgroundColor:
+                      Object.keys(data).length > 0
+                        ? COLORS[data.palette].primary
+                        : COLORS[0].primary,
+                  },
+                ]}
+              >
+                <Text style={{color: 'white'}}>Click to see in BGG!</Text>
+              </Pressable>
+            </View>
           </View>
         ) : (
-          <Text style={{ color: "white", marginTop: 10 }}>Loading...</Text>
+          <Text>Loading...</Text>
         )}
       </>
     </Pressable>
@@ -117,8 +132,20 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderRadius: 5,
   },
-  gameCardText: {
+  gameCardInfo: {
     width: "60%",
+    justifyContent: "center",
+  },
+  moreInfo: {
+    position: "absolute",
+    bottom: -8,
+    right: -10,
+    borderTopLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+  },
+  gameCardText: {
     paddingLeft: 10,
     paddingBottom: 15,
     fontSize: 18,
