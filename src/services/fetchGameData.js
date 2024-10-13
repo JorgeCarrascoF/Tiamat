@@ -1,3 +1,4 @@
+import formatText from "../utils/formatText";
 import { parseXML } from "../utils/parseXML";
 
 const fetchGameData = async (id) => {
@@ -30,12 +31,7 @@ const extractGameData = (data) => {
   let name = data.boardgames.boardgame[0].name[0]._;
 
   let description = data.boardgames.boardgame[0].description[0];
-  description = description
-    .replaceAll("<br/>", "")
-    .replaceAll("&quot;", "")
-    .replaceAll("&mdash", "")
-    .replaceAll("&rsquo;", "'")
-    .replaceAll("&#10;", " ");
+  description = formatText(description);
 
   let image;
   if (data.boardgames.boardgame[0].image != undefined) {
