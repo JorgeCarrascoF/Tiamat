@@ -3,6 +3,7 @@ import { View, Text, Pressable, StyleSheet } from "react-native";
 import { COLORS } from "../utils/colors";
 import APIForm from "../components/APIForm";
 import { GamesContext } from "../navigation/Index";
+import ManualForm from "../components/ManualForm";
 
 const NewGamePage = () => {
   const [addingFromAPI, setAddingFromAPI] = useState(true);
@@ -19,7 +20,7 @@ const NewGamePage = () => {
           },
         ]}
       >
-        Añadir juego nuevo
+        Add new game
       </Text>
       <Pressable
         onPress={() => {
@@ -34,7 +35,7 @@ const NewGamePage = () => {
           {addingFromAPI ? "Add manually" : "Use API"}
         </Text>
       </Pressable>
-      <APIForm></APIForm>
+      {addingFromAPI ? <APIForm></APIForm> : <ManualForm />}
     </View>
   );
 };

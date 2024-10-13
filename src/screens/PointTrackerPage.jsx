@@ -91,8 +91,12 @@ const PointTrackerPage = () => {
       points: 0,
     };
     newPlayers.push(player);
-
     setAllPlayers(newPlayers);
+
+    let newData = { ...data };
+    newData.tools.points = newPlayers;
+    setData(newData);
+    saveData(newData);
   };
 
   const deletePlayer = (id) => {
@@ -123,7 +127,12 @@ const PointTrackerPage = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={[styles.title, { borderBottomColor: COLORS[data.palette].primary }]}>
+      <Text
+        style={[
+          styles.title,
+          { borderBottomColor: COLORS[data.palette].primary },
+        ]}
+      >
         Point Tracker
       </Text>
       {addingPlayers ? (
@@ -164,7 +173,12 @@ const PointTrackerPage = () => {
                 deletePlayer={deletePlayer}
               />
             ))}
-            <View style={[styles.newPlayer, { borderColor: COLORS[data.palette].primary }]}>
+            <View
+              style={[
+                styles.newPlayer,
+                { borderColor: COLORS[data.palette].primary },
+              ]}
+            >
               <TextInput
                 style={styles.newPlayerInput}
                 onChangeText={(e) => {

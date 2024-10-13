@@ -125,7 +125,9 @@ const APIForm = () => {
                   styles.gameListItem,
                   {
                     backgroundColor:
-                      gameName == item ? COLORS[data.palette].primary : COLORS[data.palette].terciary,
+                      gameName == item
+                        ? COLORS[data.palette].primary
+                        : COLORS[data.palette].terciary,
                   },
                 ]}
                 onPress={() => {
@@ -159,14 +161,28 @@ const APIForm = () => {
         </View>
       )}
       {choosingOwner && (
-        <FormOwnerSelector
-          selectedOwner={chosenOwner}
-          setOwner={setChosenOwner}
-        />
+        <>
+          <Text
+            style={[
+              styles.ownerTitle,
+              { backgroundColor: COLORS[data.palette].primary },
+            ]}
+          >
+            Choose owner
+          </Text>
+          <FormOwnerSelector
+            selectedOwner={chosenOwner}
+            setOwner={setChosenOwner}
+            valid={true}
+          />
+        </>
       )}
       {chosenOwner !== "" && (
         <Pressable
-          style={[styles.saveGameButton, { backgroundColor: COLORS[data.palette].primary }]}
+          style={[
+            styles.saveGameButton,
+            { backgroundColor: COLORS[data.palette].primary },
+          ]}
           onPress={() => {
             saveGameAndOwner();
           }}
@@ -200,6 +216,20 @@ const styles = StyleSheet.create({
     marginTop: 10,
     width: "95%",
     alignItems: "center",
+  },
+  ownerTitle: {
+    fontWeight: "bold",
+    fontSize: 16,
+    textAlign: "left",
+    color: "white",
+    alignSelf: "flex-start",
+    paddingLeft: 15,
+    paddingRight: 20,
+    paddingVertical: 3,
+    marginTop: 10,
+    borderRadius: 15,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
   },
   saveGameButton: {
     padding: 10,

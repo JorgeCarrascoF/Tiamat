@@ -4,14 +4,18 @@ import { GamesContext } from "../navigation/Index";
 import OwnerCard from "./OwnerCard";
 import { COLORS } from "../utils/colors";
 
-const FormOwnerSelector = ({ selectedOwner, setOwner }) => {
+const FormOwnerSelector = ({ selectedOwner, setOwner, valid }) => {
   const { data } = useContext(GamesContext);
 
   let owners = data.players;
 
   return (
-    <View style={[styles.container, {    backgroundColor: COLORS[data.palette].primary,}]}>
-      <Text style={styles.title}>Select owner</Text>
+    <View
+      style={[
+        styles.container,
+        { backgroundColor: valid ? COLORS[data.palette].primary : 'red' },
+      ]}
+    >
       <FlatList
         data={owners}
         style={styles.ownerList}
@@ -33,9 +37,9 @@ const FormOwnerSelector = ({ selectedOwner, setOwner }) => {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    padding: 10,
-    marginTop: 15,
+    padding: 3,
     borderRadius: 10,
+    borderTopLeftRadius: 0,
     alignItems: "center",
   },
   title: {

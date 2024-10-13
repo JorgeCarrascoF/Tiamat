@@ -43,7 +43,6 @@ const links = [
 
 const AppBar = () => {
   const { data } = useContext(GamesContext);
-  console.log(data);
 
   return (
     <View
