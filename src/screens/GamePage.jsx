@@ -1,5 +1,13 @@
 import { useContext, useState } from "react";
-import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  ScrollView,
+  Pressable,
+  Linking,
+} from "react-native";
 import { useNavigate, useParams } from "react-router-native";
 import { GamesContext } from "../navigation/Index";
 import { COLORS } from "../utils/colors";
@@ -22,6 +30,12 @@ const GamePage = () => {
     let newData = { ...data, tabletopGames: newGames };
     await saveData(newData);
     setData(newData);
+  };
+
+  const openBGGPage = () => {
+    Linking.openURL(`https://boardgamegeek.com/boardgame/${game.id}`).catch(
+      (err) => console.error("Failed to open URL:", err)
+    );
   };
 
   return (
@@ -47,7 +61,17 @@ const GamePage = () => {
       >
         <Text style={styles.gameDescription}>{game.description}</Text>
       </ScrollView>
-
+      {game.addedFromAPI && (
+        <Pressable
+          onPress={openBGGPage}
+          style={[
+            styles.button,
+            { backgroundColor: COLORS[data.palette].primary },
+          ]}
+        >
+          <Text style={styles.buttonText}>See game on BGG</Text>
+        </Pressable>
+      )}
       <GameOwnerLink owner={owner} />
     </View>
   );
@@ -73,8 +97,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   gameDescriptionContainer: {
-    maxHeight: 120,
-    marginTop: 10,
+    maxHeight: 100,
+    marginVertical: 5,
     width: "100%",
   },
   gameDescription: {
@@ -82,6 +106,17 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingHorizontal: 20,
     paddingHorizontal: 10,
+  },
+  button: {
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    borderRadius: 25,
+    marginTop: 15,
+  },
+  buttonText: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
   },
 });
 

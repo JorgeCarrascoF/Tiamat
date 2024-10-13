@@ -73,6 +73,7 @@ const APIForm = () => {
       image: chosenGame.image,
       duration: chosenGame.duration,
       year: chosenGame.year,
+      addedFromAPI: true,
     };
 
     let newData = { ...data };
