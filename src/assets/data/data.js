@@ -16,7 +16,7 @@ const appData = {
   ],
   players: [
     {
-      id: '0-Player',
+      id: 'Player-0',
       name: "Player",
       image: require("../img/avatars/alien.png"),
     },
