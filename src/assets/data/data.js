@@ -4,7 +4,7 @@ const appData = {
       id: 0,
       name: "Game",
       description:
-      "To add a game, press the + button on the right bottom corner of the Games screen. You can filter games by number of playes and game owner.",
+      "To add a game, press the + button on the right bottom corner of the Games screen. You can filter games by number of players and game owner.",
       minPlayers: 2,
       maxPlayers: 8,
       duration: 60,
