@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet, Pressable, Image } from "react-native";
+import Constants from "expo-constants";
 import { COLORS } from "../utils/colors";
 import { useContext, useState } from "react";
 import { GamesContext } from "../navigation/Index";
@@ -118,7 +119,7 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     alignSelf: "center",
-    marginTop: 20,
+    // marginTop: Constants.statusBarHeight,
   },
   title: {
     fontWeight: "bold",

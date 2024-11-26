@@ -3,6 +3,7 @@ import { COLORS } from "../utils/colors";
 import { Link } from "react-router-native";
 import { useContext } from "react";
 import { GamesContext } from "../navigation/Index";
+import Constants from "expo-constants";
 
 const links = [
   {
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     alignSelf: "center",
-    marginTop: 20,
+    // marginTop: Constants.statusBarHeight,
     flexDirection: "column",
   },
   title: {

@@ -14,7 +14,7 @@ import { useContext, useState } from "react";
 import { GamesContext } from "../navigation/Index";
 import saveData from "../services/saveData";
 import { useNavigate } from "react-router-native";
-import Svg, {Path} from "react-native-svg";
+import Svg, { Path } from "react-native-svg";
 
 const OwnerForm = () => {
   const { data, setData } = useContext(GamesContext);
@@ -26,9 +26,13 @@ const OwnerForm = () => {
 
   let avatarsArray = avatars;
 
+  const generateUniqueId = () => {
+    return `${Math.random().toString(36).substring(2, 15)}`;
+  };
+
   const addOwner = () => {
     let owner = {
-      id: data.players.length,
+      id: name + "-" + generateUniqueId(),
       name: name,
       image: avatarsArray[selectedAvatar].src,
     };
@@ -94,7 +98,7 @@ const OwnerForm = () => {
                     styles.selectedAvatar,
                     { backgroundColor: COLORS[data.palette].primary },
                   ]}
-                  fill={'#FFFFFF'}
+                  fill={"#FFFFFF"}
                 >
                   <Path d="M9 20.42l-6.21-6.21 2.83-2.83L9 14.77l9.88-9.89 2.83 2.83L9 20.42z" />
                 </Svg>

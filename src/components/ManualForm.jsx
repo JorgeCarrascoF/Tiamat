@@ -5,7 +5,6 @@ import { COLORS } from "../utils/colors";
 import { GamesContext } from "../navigation/Index";
 import saveData from "../services/saveData";
 import { useNavigate } from "react-router-native";
-import { askAsync } from "expo-permissions";
 
 const ManualForm = () => {
   let { data, setData } = useContext(GamesContext);

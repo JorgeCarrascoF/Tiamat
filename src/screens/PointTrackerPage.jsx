@@ -12,6 +12,7 @@ import { COLORS } from "../utils/colors";
 import PlayerSelector from "../components/PlayerSelector";
 import PointTracker from "../components/PointTracker";
 import saveData from "../services/saveData";
+import Constants from "expo-constants";
 
 const PointTrackerPage = () => {
   const { data, setData } = useContext(GamesContext);
@@ -232,7 +233,7 @@ const styles = StyleSheet.create({
   container: {
     height: "100%",
     width: "100%",
-    marginTop: 10,
+    // marginTop: Constants.statusBarHeight,
   },
   row: {
     flexDirection: "row",

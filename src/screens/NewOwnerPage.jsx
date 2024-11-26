@@ -3,6 +3,7 @@ import { COLORS } from "../utils/colors";
 import OwnerForm from "../components/OwnerForm";
 import { useContext } from "react";
 import { GamesContext } from "../navigation/Index";
+import Constants from "expo-constants";
 
 const NewOwnerPage = () => {
   let { data } = useContext(GamesContext);
@@ -12,7 +13,6 @@ const NewOwnerPage = () => {
         style={[
           styles.title,
           {
-            color: COLORS[data.palette].primary,
             borderBottomColor: COLORS[data.palette].primary,
           },
         ]}
@@ -28,17 +28,23 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     height: "100%",
-    padding: 20,
+    // marginTop: Constants.statusBarHeight,
+    alignItems: "center",
+    alignSelf: "center",
+    paddingHorizontal: 20,
   },
   title: {
     alignSelf: "flex-start",
-    width: "100%",
+    width: "80%",
     fontSize: 20,
     fontWeight: "bold",
-    marginBottom: 20,
-    paddingLeft: 5,
-
-    borderBottomWidth: 2,
+    textAlign: "left",
+    paddingHorizontal: 10,
+    marginHorizontal: 20,
+    paddingVertical: 3,
+    borderBottomWidth: 1,
+    marginTop: 15,
+    marginBottom: 15,
   },
 });
 

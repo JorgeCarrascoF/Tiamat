@@ -22,10 +22,16 @@
       "permissions": [
         "WRITE_EXTERNAL_STORAGE",
         "READ_EXTERNAL_STORAGE"
-      ]
+      ],
+      "package": "com.jorgecf.Tiamat"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "37416669-39b7-4afd-b311-bd3147614e85"
+      }
     }
   }
 }

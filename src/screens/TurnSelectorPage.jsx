@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import { GamesContext } from "../navigation/Index";
 import { StyleSheet } from "react-native";
 import { COLORS } from "../utils/colors";
+import Constants from "expo-constants";
 
 const TurnSelectorPage = () => {
   const { data } = useContext(GamesContext);
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     alignSelf: "center",
-    marginTop: 20,
+    // marginTop: Constants.statusBarHeight,
   },
   title: {
     fontWeight: "bold",

@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { GamesContext } from "../navigation/Index";
 import saveData from "../services/saveData";
 import { COLORS } from "../utils/colors";
+import Constants from "expo-constants";
 
 const OwnerPage = () => {
   const id = parseInt(useParams().id);
@@ -69,13 +70,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: "100%",
     width: "100%",
-    marginTop: 80,
+    marginTop: 60,
     marginBottom: 50,
     marginHorizontal: 10,
   },
   imageContainer: {
     borderWidth: 5,
-
     borderRadius: 200,
     overflow: "hidden",
   },

@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
+import Constants from "expo-constants";
 import { COLORS } from "../utils/colors";
 import APIForm from "../components/APIForm";
 import { GamesContext } from "../navigation/Index";
@@ -15,7 +16,6 @@ const NewGamePage = () => {
         style={[
           styles.title,
           {
-            color: COLORS[data.palette].primary,
             borderBottomColor: COLORS[data.palette].primary,
           },
         ]}
@@ -42,20 +42,24 @@ const NewGamePage = () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: "100%",
     width: "100%",
-    padding: 20,
+    height: "100%",
+    // marginTop: Constants.statusBarHeight,
     alignItems: "center",
+    padding: 20,
   },
   title: {
     alignSelf: "flex-start",
     width: "60%",
     fontSize: 20,
     fontWeight: "bold",
-    marginBottom: 20,
-    paddingLeft: 5,
-
-    borderBottomWidth: 2,
+    textAlign: "left",
+    paddingHorizontal: 10,
+    marginHorizontal: 20,
+    paddingVertical: 3,
+    borderBottomWidth: 1,
+    marginTop: 15,
+    marginBottom: 15,
   },
   toggleFormButton: {
     width: 110,

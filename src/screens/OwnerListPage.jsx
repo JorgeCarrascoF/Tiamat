@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { View, Text, ScrollView, StyleSheet, Image } from "react-native";
 import { GamesContext } from "../navigation/Index";
+import Constants from "expo-constants";
 
 import OwnerListCard from "../components/OwnerListCard";
 import { COLORS } from "../utils/colors";
@@ -54,7 +55,7 @@ const OwnerListPage = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
+    // marginTop: Constants.statusBarHeight,
     width: "100%",
     height: "100%",
   },

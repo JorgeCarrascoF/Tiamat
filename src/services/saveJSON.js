@@ -1,8 +1,6 @@
 import * as FileSystem from 'expo-file-system'
 import { StorageAccessFramework } from 'expo-file-system';
-import * as MediaLibrary from 'expo-media-library'
 import * as Sharing from 'expo-sharing'
-import * as Permissions from 'expo-permissions';
 
 
 const saveJSON = async (jsonData) => {

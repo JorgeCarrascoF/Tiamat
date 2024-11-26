@@ -6,6 +6,7 @@ import {
   Text,
   View,
 } from "react-native";
+import Constants from "expo-constants";
 import { COLORS } from "../utils/colors";
 import { useContext, useState } from "react";
 import clearData from "../services/clearData";
@@ -192,7 +193,7 @@ const styles = StyleSheet.create({
   container: {
     height: "100%",
     width: "100%",
-    marginTop: 20,
+    // marginTop: Constants.statusBarHeight,
     flexDirection: "column",
   },
   title: {

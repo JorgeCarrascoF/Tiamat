@@ -8,6 +8,7 @@ import {
   Pressable,
   TextInput,
 } from "react-native";
+import Constants from "expo-constants";
 import { GamesContext } from "../navigation/Index";
 import { COLORS } from "../utils/colors";
 import NumPlayerSelector from "../components/NumPlayerSelector";
@@ -168,7 +169,7 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     alignSelf: "center",
-    marginTop: 20,
+    // marginTop: Constants.statusBarHeight,
   },
   teamsCreatedView: {
     alignItems: "center",

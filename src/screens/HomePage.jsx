@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import Constants from "expo-constants";
 import { COLORS } from "../utils/colors";
 import { GamesContext } from "../navigation/Index";
 import RandomGame from "../components/RandomGame";
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     alignSelf: "center",
-    marginTop: 20,
+    // marginTop: Constants.statusBarHeight,
   },
   title: {
     fontWeight: "bold",
@@ -65,7 +66,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginHorizontal: 20,
     paddingVertical: 3,
-
     borderBottomWidth: 1,
     marginTop: 15,
   },

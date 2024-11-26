@@ -8,6 +8,7 @@ import {
   Pressable,
   Linking,
 } from "react-native";
+import Constants from "expo-constants";
 import { useNavigate, useParams } from "react-router-native";
 import { GamesContext } from "../navigation/Index";
 import { COLORS } from "../utils/colors";
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: 10,
     alignItems: "center",
-    marginTop: 20,
+    // marginTop: Constants.statusBarHeight,
   },
   gameImage: {
     width: 280,

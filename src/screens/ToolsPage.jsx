@@ -4,6 +4,7 @@ import { Link } from "react-router-native";
 import { useContext } from "react";
 import { GamesContext } from "../navigation/Index";
 import Svg, { Path } from "react-native-svg";
+import Constants from "expo-constants";
 
 const tools = [
   {
@@ -76,7 +77,7 @@ const ToolsPage = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
+    // marginTop: Constants.statusBarHeight,
     width: "100%",
     height: "100%",
   },
