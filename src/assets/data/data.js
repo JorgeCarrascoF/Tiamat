@@ -9,7 +9,7 @@ const appData = {
       maxPlayers: 8,
       duration: 60,
       year: 2021,
-      owner: 0,
+      owner: 'Player-0',
       image: "https://miro.medium.com/v2/0*ZjYSm_q36J4KChdn",
       addedFromAPI: false
     },
