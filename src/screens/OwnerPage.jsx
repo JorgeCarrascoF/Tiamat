@@ -5,10 +5,9 @@ import { useContext } from "react";
 import { GamesContext } from "../navigation/Index";
 import saveData from "../services/saveData";
 import { COLORS } from "../utils/colors";
-import Constants from "expo-constants";
 
 const OwnerPage = () => {
-  const id = parseInt(useParams().id);
+  const id = useParams().id;
   const { data, setData } = useContext(GamesContext);
 
   const navigate = useNavigate();
