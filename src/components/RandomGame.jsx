@@ -10,14 +10,20 @@ const RandomGame = () => {
   const [randGame, setRandGame] = useState(null);
   const [randGameUrl, setRandGameUrl] = useState("/games");
 
+  const [noGames, setNoGames] = useState(false);
+
   useEffect(() => {
     if (Object.keys(data).length > 0) {
-      const randomNumber = getRandomNumberByDay(
-        0,
-        data.tabletopGames.length - 1
-      );
-      setRandGame(randomNumber);
-      setRandGameUrl(`/game/${data.tabletopGames[randomNumber].id}`);
+      if (data.tabletopGames.length > 0) {
+        const randomNumber = getRandomNumberByDay(
+          0,
+          data.tabletopGames.length - 1
+        );
+        setRandGame(randomNumber);
+        setRandGameUrl(`/game/${data.tabletopGames[randomNumber].id}`);
+      } else {
+        setNoGames(true);
+      }
     }
   }, [data]);
 
@@ -32,48 +38,33 @@ const RandomGame = () => {
   };
 
   return (
-    <Link
-      to={randGameUrl}
-      underlayColor={
-        Object.keys(data).length > 0
-          ? COLORS[data.palette].primary
-          : COLORS[0].primary
-      }
-      style={[
-        styles.cardContainer,
-        {
-          borderColor:
+    <>
+      {noGames ? (
+        <Link
+          to="/newgame"
+          underlayColor={
             Object.keys(data).length > 0
               ? COLORS[data.palette].primary
-              : COLORS[0].primary,
-          backgroundColor:
-            Object.keys(data).length > 0
-              ? COLORS[data.palette].primary
-              : COLORS[0].primary,
-        },
-      ]}
-    >
-      <View>
-        <Text
+              : COLORS[0].primary
+          }
           style={[
-            styles.title,
+            styles.cardContainer,
             {
-              backgroundColor:
+              borderColor:
+                Object.keys(data).length > 0
+                  ? COLORS[data.palette].primary
+                  : COLORS[0].primary,
+              borderColor:
                 Object.keys(data).length > 0
                   ? COLORS[data.palette].primary
                   : COLORS[0].primary,
             },
           ]}
         >
-          Random game of the day
-        </Text>
-        <View style={styles.game}>
-          {randGame === null ? (
-            <Text>Can't connect to games, waiting...</Text>
-          ) : (
+          <>
             <Text
               style={[
-                styles.gameName,
+                styles.title,
                 {
                   backgroundColor:
                     Object.keys(data).length > 0
@@ -81,21 +72,81 @@ const RandomGame = () => {
                       : COLORS[0].primary,
                 },
               ]}
-              numberOfLines={1}
-              ellipsisMode="tail"
             >
-              {data.tabletopGames[randGame].name}
+              Random game of the day
             </Text>
-          )}
-          {randGame !== null && (
-            <Image
-              source={{ uri: data.tabletopGames[randGame].image }}
-              style={styles.gameImage}
-            />
-          )}
-        </View>
-      </View>
-    </Link>
+            <Text style={[styles.gameCard]}>
+              You don't have any games yet. Add one!
+            </Text>
+          </>
+        </Link>
+      ) : (
+        <Link
+          to={randGameUrl}
+          underlayColor={
+            Object.keys(data).length > 0
+              ? COLORS[data.palette].primary
+              : COLORS[0].primary
+          }
+          style={[
+            styles.cardContainer,
+            {
+              borderColor:
+                Object.keys(data).length > 0
+                  ? COLORS[data.palette].primary
+                  : COLORS[0].primary,
+              backgroundColor:
+                Object.keys(data).length > 0
+                  ? COLORS[data.palette].primary
+                  : COLORS[0].primary,
+            },
+          ]}
+        >
+          <View>
+            <Text
+              style={[
+                styles.title,
+                {
+                  backgroundColor:
+                    Object.keys(data).length > 0
+                      ? COLORS[data.palette].primary
+                      : COLORS[0].primary,
+                },
+              ]}
+            >
+              Random game of the day
+            </Text>
+            <View style={styles.game}>
+              {randGame === null ? (
+                <Text>Can't connect to games, waiting...</Text>
+              ) : (
+                <Text
+                  style={[
+                    styles.gameName,
+                    {
+                      backgroundColor:
+                        Object.keys(data).length > 0
+                          ? COLORS[data.palette].primary
+                          : COLORS[0].primary,
+                    },
+                  ]}
+                  numberOfLines={1}
+                  ellipsisMode="tail"
+                >
+                  {data.tabletopGames[randGame].name}
+                </Text>
+              )}
+              {randGame !== null && (
+                <Image
+                  source={{ uri: data.tabletopGames[randGame].image }}
+                  style={styles.gameImage}
+                />
+              )}
+            </View>
+          </View>
+        </Link>
+      )}
+    </>
   );
 };
 
@@ -106,15 +157,17 @@ const styles = StyleSheet.create({
     width: 300,
     maxHeight: 150,
     borderRadius: 10,
+    borderWidth: 2,
     alignItems: "center",
   },
   title: {
     textAlign: "left",
-    width: "100%",
+    width: "101%",
     color: "white",
     fontStyle: "italic",
     fontWeight: "bold",
     height: 30,
+    marginTop: -1,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     paddingVertical: 5,
@@ -122,6 +175,14 @@ const styles = StyleSheet.create({
   },
   game: {
     overflow: "hidden",
+  },
+  gameCard: {
+    width: "100%",
+    marginTop: 10,
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 10,
+    flexDirection: "row",
   },
   gameName: {
     position: "absolute",
