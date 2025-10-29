@@ -1,6 +1,6 @@
 # Tiamat
 
-> A modern JavaScript application built by Jorge Carrasco, designed to help board-game groups manage their games
+> A modern JavaScript application designed to help board-game groups manage their games
 
 ## 🔍 Overview  
 Tiamat is a project where I explored …  
